@@ -133,15 +133,19 @@ metadata/tcga/derived/tcga_candidates.tsv.
 
 ## Workflow previsto
 
-FASTQ → FastQC → agrupación por muestra → Salmon → MultiQC.
+FASTQ paired-end → FastQC → trimming opcional → agrupación de runs por muestra → Salmon → cuantificación de transcritos → MultiQC.
 
-Se evaluará trimming según el control de calidad.
-Se documentarán referencias, versiones y parámetros.
-Se utilizarán ambientes reproducibles.
+El workflow se implementará en Nextflow DSL2. FastQC evaluará la calidad de las lecturas y el trimming se aplicará únicamente si el control de calidad indica presencia de adaptadores o bases de baja calidad.
 
-Se generarán report, timeline, trace y DAG de Nextflow.
+Cuando una muestra tenga varios runs, sus lecturas se agruparán antes de la cuantificación para obtener un único resultado por muestra biológica.
 
-Diagrama de diseño: docs/workflow.md.
+Salmon realizará la cuantificación a nivel de transcrito. Posteriormente, las cuantificaciones se importarán y resumirán a nivel de gen mediante `tximport` en R, utilizando una correspondencia transcrito-gen compatible con la referencia.
+
+Se documentarán la versión del genoma y transcriptoma de referencia, la anotación, el tipo de biblioteca, las versiones de las herramientas, los parámetros y los ambientes reproducibles utilizados.
+
+MultiQC integrará los reportes de control de calidad y cuantificación. Nextflow generará además los archivos `report`, `timeline`, `trace` y `DAG`.
+
+Diagrama de diseño: `docs/workflow.md`.
 
 ## Análisis principal en R
 
@@ -160,6 +164,10 @@ en el grupo ever_smoker.
 Los resultados se interpretarán como asociaciones.
 El PCA y el clustering se utilizarán para explorar la estructura
 de los datos, sin asumir separación por tabaquismo.
+
+DESeq2 utilizará conteos sin normalización previa para el análisis diferencial. La matriz transformada se reservará para PCA y clustering.
+
+El ajuste por covariables dependerá de los datos disponibles, su distribución y la posibilidad de estimar el modelo.
 
 ## Comparación adicional opcional
 
@@ -180,7 +188,6 @@ de GEO no se tratarán como observaciones independientes.
 - docs/workflow.md: diagrama de diseño.
 - workflow/: código y configuración del pipeline.
 - analysis/: scripts del análisis posterior.
-
 
 ## Estado de desarrollo
 
