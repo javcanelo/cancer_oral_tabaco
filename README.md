@@ -109,9 +109,27 @@ Grupos:
 Los valores desconocidos o no informados se excluirán del contraste.
 No se asumirá HPV negativo por la sola localización en cavidad oral.
 
-El tamaño final de la cohorte y la distribución de grupos están
-pendientes de verificar mediante los metadatos.
-También se verificará la disponibilidad de la información de HPV.
+### Selección preliminar
+
+- La descarga clínica contiene 167 pacientes.
+- Hay 163 con tabaquismo conocido: 115 ever_smoker y 48 never_smoker.
+- Se encontraron registros explícitos de HPV para 35 pacientes.
+- De ellos, 29 tienen únicamente resultados negativos en los registros revisados.
+- TCGA-BB-7872 presenta resultados negativos y positivos y se excluyó
+  provisionalmente por discordancia.
+- Al cruzar los 29 candidatos con la información de tabaquismo,
+  quedan 28 pacientes: 22 ever_smoker y 6 never_smoker.
+- Un candidato no tiene una categoría conocida de tabaquismo.
+
+La cohorte es provisional. Falta verificar el contexto y método de
+las pruebas de HPV, la precisión del sitio anatómico y la correspondencia
+con los archivos de expresión de tumor primario.
+
+El desequilibrio entre grupos y el tamaño del grupo never_smoker
+se considerarán limitaciones del análisis.
+
+La selección provisional está guardada en:
+metadata/tcga/derived/tcga_candidates.tsv. 
 
 ## Workflow previsto
 
@@ -157,9 +175,12 @@ de GEO no se tratarán como observaciones independientes.
 - metadata/geo_all_runs.csv: tabla completa de muestras y runs revisados.
 - metadata/geo_selected_runs.csv: metadatos de los runs seleccionados.
 - metadata/samplesheet.csv: entradas previstas para Nextflow.
+- metadata/tcga/: metadatos clínicos originales descargados de GDC.
+- metadata/tcga/derived/: tablas derivadas de tabaquismo, revisión de HPV y candidatos.
 - docs/workflow.md: diagrama de diseño.
 - workflow/: código y configuración del pipeline.
 - analysis/: scripts del análisis posterior.
+
 
 ## Estado de desarrollo
 

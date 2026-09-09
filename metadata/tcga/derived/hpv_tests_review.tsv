@@ -1,0 +1,63 @@
+cases.case_id	cases.submitter_id	molecular_tests.biospecimen_type	molecular_tests.hpv_strain	molecular_tests.laboratory_test	molecular_tests.molecular_analysis_method	molecular_tests.molecular_test_id	molecular_tests.test_result
+039788ec-1364-40c7-9e9d-13dc305674e9	TCGA-CN-6998	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	bb1f6a60-d208-4728-a125-021230969d32	Negative
+039788ec-1364-40c7-9e9d-13dc305674e9	TCGA-CN-6998	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	eda4496b-b030-4f35-bce9-60f28d42be57	Negative
+03aca47b-7653-4938-9178-ed7c37eee6d5	TCGA-CR-7392	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	1f87dc3b-0507-4fa8-a7f5-c36ee3aa69b2	Negative
+03aca47b-7653-4938-9178-ed7c37eee6d5	TCGA-CR-7392	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	dcd18a68-801a-437e-804d-f058161ea8e6	Negative
+09f6c3ab-b799-404a-b301-22b9caf33e82	TCGA-QK-AA3K	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	e59d17f8-deea-4888-8886-cf59f2e9b78c	Positive
+0f4bb968-6e10-4a86-a03e-37b61d084f31	TCGA-CR-7393	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	144bce15-4e97-431d-847a-b8f26f01a958	Negative
+0f4bb968-6e10-4a86-a03e-37b61d084f31	TCGA-CR-7393	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	eaad05e6-a361-405b-9f65-1033c442b1df	Negative
+116ad004-929d-4c8d-8eee-883d132e0fe5	TCGA-BA-A6DE	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	b813325d-3d3a-4f59-856c-4987b27a9890	Negative
+116ad004-929d-4c8d-8eee-883d132e0fe5	TCGA-BA-A6DE	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	c22fe79b-7506-4392-b4de-cc7cd069ab40	Negative
+23c4e2eb-142b-4fcc-a974-9a248aec3f37	TCGA-CN-6017	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	98f3343f-04c5-42bc-979b-c4b3a9c20a98	Negative
+23c4e2eb-142b-4fcc-a974-9a248aec3f37	TCGA-CN-6017	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	e045d5b3-5e80-4044-a8fc-ad33948a386a	Negative
+2fc48edb-a428-49c3-9599-d00eb2b448ac	TCGA-CN-6024	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	abb42ab2-b9f6-4498-9202-5d1407ca5032	Negative
+2fc48edb-a428-49c3-9599-d00eb2b448ac	TCGA-CN-6024	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	e0fe201f-fe36-450c-a2cf-06827d40c6ca	Negative
+444e5bfc-d4e5-4b0d-b96d-88ecea8873e9	TCGA-CN-4742	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	c924d157-95c8-4d13-802d-1b413bec2f9d	Negative
+444e5bfc-d4e5-4b0d-b96d-88ecea8873e9	TCGA-CN-4742	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	faa42a20-a314-4421-9fb0-90f85c767efe	Negative
+45c3cd39-1c5d-4e26-8afc-5bed3c230088	TCGA-CR-7372	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	07b9bd18-15fc-4e34-a924-ccc02188c42d	Negative
+45c3cd39-1c5d-4e26-8afc-5bed3c230088	TCGA-CR-7372	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	104561f2-d65a-4b94-b625-fc86735ac9f6	Negative
+54dab158-eb39-4334-8b5a-bf290e6b8bb1	TCGA-CN-5370	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	259f068e-ac61-4bc7-94b2-b6b5fe034ba5	Negative
+54dab158-eb39-4334-8b5a-bf290e6b8bb1	TCGA-CN-5370	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	cf519c0c-a809-49e2-8f30-365e730b1bdf	Negative
+5fce954c-11b9-41f4-9471-4b5bdc0efa7f	TCGA-CR-6491	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	70310647-d15d-4f52-945c-bf13d060df53	Negative
+5fce954c-11b9-41f4-9471-4b5bdc0efa7f	TCGA-CR-6491	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	79e8a37c-a1b4-4bf2-8d77-099738f53daf	Negative
+67f2ac9b-b9fb-4ffd-ae60-6ff1114e9290	TCGA-CR-7390	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	7aeb1f67-eaff-469c-89b8-4b21509f38ee	Negative
+67f2ac9b-b9fb-4ffd-ae60-6ff1114e9290	TCGA-CR-7390	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	ba0848c9-9a6d-4d34-8965-256acb15750a	Negative
+6ea380ad-d73d-41b2-b448-2d224deec01b	TCGA-MT-A51W	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	05ef49b4-cc5c-4fc4-9073-48d3bcc88b34	Negative
+6ea380ad-d73d-41b2-b448-2d224deec01b	TCGA-MT-A51W	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	37d0edae-b225-438c-8d0a-5df5d79064c0	Negative
+714496c5-d221-4397-9c5a-cd2d22603e6f	TCGA-CN-6013	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	85538531-53c9-44a9-a327-5f753935f4e6	Negative
+714496c5-d221-4397-9c5a-cd2d22603e6f	TCGA-CN-6013	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	fed6b93a-12ba-4fe7-b764-0b317d8b5fbe	Negative
+757c56d0-8a49-464f-866a-ae98816de60b	TCGA-4P-AA8J	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	caa76fdd-e80a-47b5-a47d-d0fee672c871	Negative
+765cc306-bdae-4caf-ad1e-35b8fe95c220	TCGA-HD-A4C1	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	3adafd55-61b8-4d2c-aaea-48c9ceae51e3	Negative
+80593c77-4530-413b-bb05-adca5d43bb82	TCGA-BB-7872	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	1a2780d0-1b2a-4a2b-9bd4-10ff88ed5611	Negative
+80593c77-4530-413b-bb05-adca5d43bb82	TCGA-BB-7872	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	5c8c66eb-d181-4f3f-b953-9a0c3a8bb640	Positive
+832316ee-08ab-412b-9e4d-8a57ff84bc11	TCGA-CR-7391	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	8e848787-edf1-4484-ab22-415d4bee5684	Negative
+832316ee-08ab-412b-9e4d-8a57ff84bc11	TCGA-CR-7391	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	a8d4ec9d-7cbd-4691-b979-cabb8f36834d	Negative
+9205dc07-93f5-4b5e-924e-8e097616160f	TCGA-HD-A6HZ	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	1cbc1f8f-6fbd-4dd5-8af1-bbf0a10a5c14	Unknown
+9205dc07-93f5-4b5e-924e-8e097616160f	TCGA-HD-A6HZ	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	83e44dab-3c39-46d2-b381-83bc8e9f263f	Unknown
+9283709d-d019-4291-a097-611a5c05244b	TCGA-CN-6020	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	8b4ec255-1641-4506-aaab-bf78bb4bc1f9	Negative
+9283709d-d019-4291-a097-611a5c05244b	TCGA-CN-6020	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	c7448bed-5a66-47e8-b27b-e6e3a9ec3acb	Negative
+a98263a5-cc90-4734-b6f1-f0108bfd5cac	TCGA-CR-6492	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	bda28c82-195e-4cc1-946b-62a16a28c6dc	Negative
+a98263a5-cc90-4734-b6f1-f0108bfd5cac	TCGA-CR-6492	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	e1638bff-979d-42c2-a6b5-7535d7e03f02	Negative
+b39c64bb-122d-44b3-9672-d0dc8468ca93	TCGA-BA-A6D8	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	66ddf2c3-6aef-4004-8aaa-551e2a13e1cf	Negative
+b39c64bb-122d-44b3-9672-d0dc8468ca93	TCGA-BA-A6D8	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	c3341252-33c6-4da5-bc45-211193f28ed2	Negative
+b4e0c62d-f2f6-4243-9e0f-ae2ad4ca4bb8	TCGA-CN-5358	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	9334defb-9057-40fa-a0cd-a114fb33ac28	Negative
+b4e0c62d-f2f6-4243-9e0f-ae2ad4ca4bb8	TCGA-CN-5358	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	e12b8020-9abf-4d36-88c9-9110e0ca6f10	Negative
+b8307f59-713f-404c-9a82-2450d2ad7507	TCGA-CN-A63V	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	d558b193-863d-4e83-8862-25887946b348	Negative
+bdc0a7f5-d0f9-4008-bf4c-51e570ca1ebc	TCGA-QK-A6IJ	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	50e45f82-c8b1-47fe-8f68-45b1880af600	Negative
+c0edde5e-d229-4061-8820-14afc712c5b6	TCGA-HD-A633	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	040db0f2-6563-437f-90be-7c34026ea0a3	Unknown
+c0edde5e-d229-4061-8820-14afc712c5b6	TCGA-HD-A633	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	bc0c2a0e-5c84-4a5d-9192-f2fdcd2e2cc4	Unknown
+c4060ca5-33e0-4c83-b91c-742d75059bdc	TCGA-BA-A6DD	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	2202cd4a-8596-4838-afa3-d5e74d063af1	Negative
+c4060ca5-33e0-4c83-b91c-742d75059bdc	TCGA-BA-A6DD	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	60a287cd-c254-4f3c-8505-de5ab9476ffd	Negative
+d296cdb5-a0f6-40cc-8ce7-73e4ccd176f3	TCGA-CR-7394	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	411bb5dc-ad7f-493a-8ae0-774b26458f0d	Negative
+d296cdb5-a0f6-40cc-8ce7-73e4ccd176f3	TCGA-CR-7394	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	6ce787e0-81f5-4a9e-aebf-1cdfa615364d	Negative
+d82e6c52-9ea4-4f60-989c-cf95d464fd6f	TCGA-DQ-7592	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	ccb3e7c1-f9c6-4db3-90a6-52b0ce6fb113	Negative
+db873dbd-d0c0-4a19-80e5-963dcfaf823e	TCGA-T3-A92N	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	fe14f40a-6c28-4de5-8689-e02a1a9aebf5	Unknown
+dec3c21b-3f59-472f-8573-27b0e830aa92	TCGA-HD-A6I0	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	72a8323e-fddc-4372-811c-3ba903057d8c	Unknown
+dec3c21b-3f59-472f-8573-27b0e830aa92	TCGA-HD-A6I0	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	96bce117-fc7f-4b96-9504-215f733ca137	Unknown
+dedd71b4-8537-4947-839e-90aceddd0893	TCGA-CN-4733	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	0917b933-7fac-4a41-9c29-a21a6d9479e9	Negative
+dedd71b4-8537-4947-839e-90aceddd0893	TCGA-CN-4733	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	162471a1-65a7-4e86-acc2-37824a6b86a3	Negative
+ee3061ec-273c-4bef-a325-35e9c469bf01	TCGA-CN-6019	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	48676a8d-5264-47ea-9f45-5df7341014a9	Negative
+ee3061ec-273c-4bef-a325-35e9c469bf01	TCGA-CN-6019	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	9b72bffa-7968-4008-929b-1acd894acc0b	Negative
+f35a0655-7504-4bd6-a9f3-6f3e59fd84b1	TCGA-BB-A5HU	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	8c2bd72b-d247-4182-b0b6-7171905ac592	Negative
+ffcf851d-7fa1-4b45-911a-a3fbd74c253a	TCGA-CN-6016	Involved Tissue, NOS	'--	Human Papillomavirus	Not Reported	113fa181-1719-491c-9fb9-1120e194d372	Negative
+ffcf851d-7fa1-4b45-911a-a3fbd74c253a	TCGA-CN-6016	Involved Tissue, NOS	'--	Human Papillomavirus	ISH	35093411-cdfb-42b6-af7b-9e8c77264077	Negative

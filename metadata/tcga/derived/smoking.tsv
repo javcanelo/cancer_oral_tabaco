@@ -1,0 +1,164 @@
+case_id	patient_id	smoking_original	group
+02dcc11f-4f0e-4c9e-8d96-d22d47beef5d	TCGA-CQ-5329	Lifelong Non-Smoker	never_smoker
+039788ec-1364-40c7-9e9d-13dc305674e9	TCGA-CN-6998	Current Smoker	ever_smoker
+03aca47b-7653-4938-9178-ed7c37eee6d5	TCGA-CR-7392	Current Reformed Smoker for > 15 yrs	ever_smoker
+0625df42-740f-4e52-8f9e-0f5b7dee251b	TCGA-CV-A6JY	Current Smoker	ever_smoker
+08a45833-16a3-4a57-a310-307ec086e558	TCGA-CV-7438	Lifelong Non-Smoker	never_smoker
+09f6c3ab-b799-404a-b301-22b9caf33e82	TCGA-QK-AA3K	Current Smoker	ever_smoker
+0ca3d25a-22e9-4e40-834b-65f402535005	TCGA-CQ-6219	Current Smoker	ever_smoker
+0f4bb968-6e10-4a86-a03e-37b61d084f31	TCGA-CR-7393	Lifelong Non-Smoker	never_smoker
+0f718e17-86c1-4221-a878-d57ae87e744f	TCGA-HD-7831	Lifelong Non-Smoker	never_smoker
+10593e5b-7acb-498b-bdf7-705e3e2bc443	TCGA-CV-A6JN	Current Smoker	ever_smoker
+10b3f56a-e61e-486b-8d3c-176668d5dc34	TCGA-DQ-5631	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+116ad004-929d-4c8d-8eee-883d132e0fe5	TCGA-BA-A6DE	Current Smoker	ever_smoker
+134223bd-5c03-4854-a034-ebd2c527833e	TCGA-CQ-A4C7	Current Reformed Smoker for > 15 yrs	ever_smoker
+1465b7ec-8d2b-47dd-8387-977eed44cc86	TCGA-CV-5971	Current Smoker	ever_smoker
+15714e69-e075-4688-8f51-c7102fe4ca07	TCGA-CV-6945	Current Smoker	ever_smoker
+15e43ee8-3080-4895-84fb-a24ad3a68b97	TCGA-F7-A50J	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+18334157-aa38-4859-a786-99a920a1fbe3	TCGA-CX-A4AQ	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+1c25aad5-13f5-44dc-a18f-425d7626ce55	TCGA-CQ-5334	Current Reformed Smoker for > 15 yrs	ever_smoker
+1c509ba7-2edf-4428-bd39-109c78b3fb30	TCGA-CV-A45P	Lifelong Non-Smoker	never_smoker
+1dd23cd6-3aa8-4553-8813-04701451846e	TCGA-CV-7103	Current Smoker	ever_smoker
+1e05fdbd-c80b-41c6-9b40-8a7200c92e76	TCGA-CV-5979	Lifelong Non-Smoker	never_smoker
+1f6167d9-c99d-4873-8d6e-e62a1c964135	TCGA-CV-5970	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+20ece2ca-8601-4cca-aec5-0a5c0b92594d	TCGA-CQ-7065	Lifelong Non-Smoker	never_smoker
+23062172-7361-4e61-8ee6-b0a613d72a24	TCGA-CV-5976	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+23c4e2eb-142b-4fcc-a974-9a248aec3f37	TCGA-CN-6017	Current Reformed Smoker for > 15 yrs	ever_smoker
+26cb1330-ce48-4006-8155-f6d52d3ab9b6	TCGA-CQ-A4CI	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+27707915-d36e-4da7-9b39-2fdd9ce0bdc5	TCGA-CV-A464	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+2a749317-0156-4213-8482-b2c2d6e52e9b	TCGA-CV-6933	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+2a7b4613-f908-4e78-98ed-857dcd7ed774	TCGA-CX-7085	Current Reformed Smoker for > 15 yrs	ever_smoker
+2c878227-77a1-4988-a46c-885db9e400f7	TCGA-QK-A8Z7	Current Smoker	ever_smoker
+2fbafcc5-896c-4e50-8956-a61540fc89be	TCGA-CV-7235	Current Reformed Smoker for > 15 yrs	ever_smoker
+2fc48edb-a428-49c3-9599-d00eb2b448ac	TCGA-CN-6024	Current Smoker	ever_smoker
+3101785d-1cc2-4bd9-9fce-02205d0548c6	TCGA-CV-A45X	Current Smoker	ever_smoker
+31202ace-6480-46db-8e0d-b4c64149e326	TCGA-BB-7863	Lifelong Non-Smoker	never_smoker
+31e58fac-3ac3-4eeb-82d6-3f2b5cb8a60d	TCGA-HD-7832	Current Smoker	ever_smoker
+3203d0ae-5fe9-4ff2-be0a-1d97f7684819	TCGA-QK-A6IG	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+34aad752-d78f-440b-abd2-f9f939c82664	TCGA-CN-A498	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+375e4b96-49da-4f65-9878-29f56fda9c2e	TCGA-MT-A51X	Current Smoker	ever_smoker
+396ccdcb-40eb-4299-8575-b26753054434	TCGA-CN-6995	Current Smoker	ever_smoker
+3aea4cf5-ade6-4747-b1d1-c431564f5fa6	TCGA-QK-A6II	Current Smoker	ever_smoker
+3c975b68-4a6e-4c97-a8d1-b9a427d4957c	TCGA-CV-5442	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+3ce5b304-6068-43ba-9e70-e4357d6d7a2a	TCGA-CX-7219	Current Smoker	ever_smoker
+3e5f451a-5882-4914-ae1a-95c898c2bcca	TCGA-BA-6872	Current Smoker	ever_smoker
+402fd96c-76d3-4ac2-9f64-77bd34be0adb	TCGA-CV-6954	Current Reformed Smoker for > 15 yrs	ever_smoker
+4075717b-2240-4842-a00a-0c4dbcb910c4	TCGA-CV-6961	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+408c5d54-7888-4955-8386-bf8819b48a6c	TCGA-CQ-5325	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+417b357e-c90e-4b63-ae7a-4b782038ffd3	TCGA-CV-6003	Lifelong Non-Smoker	never_smoker
+42bc2336-2408-441a-83b9-aadc9700f750	TCGA-D6-6825	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+42d342d9-f8a5-4940-9b6b-5773d66055f9	TCGA-D6-A6EO	Current Reformed Smoker, Duration Not Specified	ever_smoker
+432fbb6c-331f-4d2d-834d-f6378d88107a	TCGA-CV-A6JD	Current Reformed Smoker for > 15 yrs	ever_smoker
+444e5bfc-d4e5-4b0d-b96d-88ecea8873e9	TCGA-CN-4742	Current Smoker	ever_smoker
+4587ae9f-71fb-4582-82ff-fb407fee6445	TCGA-P3-A5QF	Lifelong Non-Smoker	never_smoker
+45c3cd39-1c5d-4e26-8afc-5bed3c230088	TCGA-CR-7372	Lifelong Non-Smoker	never_smoker
+49b94421-fe82-4f24-8ef2-820674142418	TCGA-CN-6996	Lifelong Non-Smoker	never_smoker
+4cacff9d-cc50-43a5-a227-16923ada7467	TCGA-CV-A6JZ	Current Smoker	ever_smoker
+4f5bc340-bdb5-418a-b3c4-96ac85e08b34	TCGA-CV-6934	Current Smoker	ever_smoker
+50239d1d-b3a4-4240-ab83-b24ba67b1299	TCGA-CV-5977	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+534f85f2-b9eb-45be-87d5-c3dffd13d541	TCGA-CV-7255	Lifelong Non-Smoker	never_smoker
+53d9a130-4a3a-4491-85cd-9a44415a1632	TCGA-DQ-5625	Current Smoker	ever_smoker
+54dab158-eb39-4334-8b5a-bf290e6b8bb1	TCGA-CN-5370	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+55a9e8ae-95a3-485c-8df0-78740fcd58d8	TCGA-D6-A4Z9	Current Reformed Smoker for > 15 yrs	ever_smoker
+59398d50-45cf-4812-a24e-0c00c0199971	TCGA-CV-6441	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+5a03e2b6-4c8b-479a-9036-9859af031da4	TCGA-CQ-5327	Lifelong Non-Smoker	never_smoker
+5a976335-2326-46f0-abf1-29b744da1f43	TCGA-CV-7102	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+5d850e54-24bb-4ae6-9e4b-09ecc7e7cfee	TCGA-CQ-A4C6	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+5fce954c-11b9-41f4-9471-4b5bdc0efa7f	TCGA-CR-6491	Current Smoker	ever_smoker
+5fe17dde-ef75-49a2-90f8-0647077b6ca5	TCGA-CN-A49A	Lifelong Non-Smoker	never_smoker
+64260b33-dac0-4442-82c8-04f0c9ea8a01	TCGA-CQ-6218	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+64a195f6-2212-4e81-bccc-e39c77a10908	TCGA-C9-A47Z	Lifelong Non-Smoker	never_smoker
+650310ff-b75e-40d2-bb8d-80e4efa36b2a	TCGA-CV-A45Q	Current Reformed Smoker for > 15 yrs	ever_smoker
+67f2ac9b-b9fb-4ffd-ae60-6ff1114e9290	TCGA-CR-7390	Current Smoker	ever_smoker
+6826ece7-1834-4367-b05b-fa92a271e179	TCGA-CQ-A4CB	Current Smoker	ever_smoker
+6a0490ea-d9c6-41cf-bec3-3257e98cc6ed	TCGA-CQ-A4C9	Current Smoker	ever_smoker
+6a82a217-f7a2-4697-98a6-6c6553e8fac1	TCGA-CV-A6JT	Lifelong Non-Smoker	never_smoker
+6ea380ad-d73d-41b2-b448-2d224deec01b	TCGA-MT-A51W	Current Smoker	ever_smoker
+6f8b9c64-16f1-4cd0-9cd6-a3c27d311cf8	TCGA-CV-A465	Lifelong Non-Smoker	never_smoker
+70741b73-9683-42bd-87fc-6a021a70103b	TCGA-BA-5556	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+714496c5-d221-4397-9c5a-cd2d22603e6f	TCGA-CN-6013	Lifelong Non-Smoker	never_smoker
+765cc306-bdae-4caf-ad1e-35b8fe95c220	TCGA-HD-A4C1	Lifelong Non-Smoker	never_smoker
+78fcc813-d0a8-44aa-b004-62810dca9d12	TCGA-CV-7238	Lifelong Non-Smoker	never_smoker
+7a211ce6-3162-4f58-bf24-9b68562913d5	TCGA-F7-A61S	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+7cabcc66-f159-42dc-bd79-953bffd93b8d	TCGA-CV-A45U	Current Smoker	ever_smoker
+7ed006e8-461f-4664-bfff-55fa6812743c	TCGA-CV-6952	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+80593c77-4530-413b-bb05-adca5d43bb82	TCGA-BB-7872	Lifelong Non-Smoker	never_smoker
+80d51546-c046-4af4-b3b3-b6bf5b1eab02	TCGA-P3-A5QA	Lifelong Non-Smoker	never_smoker
+832316ee-08ab-412b-9e4d-8a57ff84bc11	TCGA-CR-7391	Current Reformed Smoker for > 15 yrs	ever_smoker
+837bf19d-1e02-4c3d-9e65-8999f0652020	TCGA-CV-A45T	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+839b660c-98fe-4468-a2b3-408594350250	TCGA-CQ-6221	Current Reformed Smoker for > 15 yrs	ever_smoker
+84fd72d1-f79d-493b-a341-826acd4aa942	TCGA-CV-6436	Current Reformed Smoker for > 15 yrs	ever_smoker
+85ae3b0f-3a54-4a23-be25-9a4deebbc011	TCGA-F7-A50G	Current Smoker	ever_smoker
+8980fb06-e38d-459f-a777-52048d492def	TCGA-QK-A8Z9	Current Smoker	ever_smoker
+8b63be59-9ce6-45a0-80d9-4d20f4918cb9	TCGA-CV-7407	Lifelong Non-Smoker	never_smoker
+8b6e939c-c4b0-4d1e-a92c-ea998bc5d36a	TCGA-CV-6940	Current Smoker	ever_smoker
+8c238d30-df8e-4e6b-98fc-21696269a294	TCGA-CV-6956	Current Smoker	ever_smoker
+8e0e456e-85ee-4de5-8f0b-72393d6acde0	TCGA-D6-6515	Lifelong Non-Smoker	never_smoker
+8f6c64c9-7799-436d-bff0-b166e56532a8	TCGA-F7-A61W	Current Smoker	ever_smoker
+8fc1f1be-d2d5-4b3a-9973-f4d964018beb	TCGA-CV-5973	Lifelong Non-Smoker	never_smoker
+91728cd6-ed91-49dc-9279-faedbe211a9d	TCGA-CV-6951	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+9180e195-dae9-4af9-90cf-71778bc9aefc	TCGA-CV-A45R	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+91a712b5-a724-48d0-ba06-4f6857683463	TCGA-DQ-5630	Current Reformed Smoker for > 15 yrs	ever_smoker
+9205dc07-93f5-4b5e-924e-8e097616160f	TCGA-HD-A6HZ	Lifelong Non-Smoker	never_smoker
+9283709d-d019-4291-a097-611a5c05244b	TCGA-CN-6020	Current Smoker	ever_smoker
+93a265b7-6c23-4e5f-b797-c117793744bf	TCGA-CV-6936	Current Smoker	ever_smoker
+9413432e-24fe-428a-b464-1a5bcdbf5f74	TCGA-CV-A45V	Lifelong Non-Smoker	never_smoker
+94a47bf8-f673-45cb-a8d3-1031317d03b3	TCGA-CV-5436	Current Smoker	ever_smoker
+9e3e8014-04d4-40d8-b2df-53c770e01df2	TCGA-CV-A45O	Current Reformed Smoker for > 15 yrs	ever_smoker
+9ffa79fa-d2d8-48e1-8fd6-4b020ecf357c	TCGA-CQ-5330	Current Reformed Smoker for > 15 yrs	ever_smoker
+a091822c-447a-49a5-8c20-e329df79599c	TCGA-CQ-6229	Lifelong Non-Smoker	never_smoker
+a1066aea-3122-4887-83d0-132ef84c06e1	TCGA-CV-A6K2	Current Reformed Smoker for > 15 yrs	ever_smoker
+a40bb4bc-9ee6-4a8b-8a33-3a4ed78f69a7	TCGA-CR-7397	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+a40f1055-3dc4-4d01-930c-92cf314f73f8	TCGA-HD-7917	Current Smoker	ever_smoker
+a4e90f64-d11a-4278-a79e-d64c936e8e86	TCGA-CV-6953	Lifelong Non-Smoker	never_smoker
+a88d6f62-88da-40c4-bc16-7fe58f038b8c	TCGA-BB-A5HZ	Lifelong Non-Smoker	never_smoker
+a98263a5-cc90-4734-b6f1-f0108bfd5cac	TCGA-CR-6492	Current Smoker	ever_smoker
+aa34f900-b2e4-4276-9d28-807ad11444ac	TCGA-CV-7104	Lifelong Non-Smoker	never_smoker
+ad6c9d09-2c03-4786-a72d-dd2aa5f603d4	TCGA-CX-7086	Current Smoker	ever_smoker
+ae90972d-5bc2-4b53-b5ff-1b8c31f39342	TCGA-CQ-A4CH	Lifelong Non-Smoker	never_smoker
+b1b3983d-37d2-4bef-bd17-708e3e600146	TCGA-CV-A6JU	Current Smoker	ever_smoker
+b39c64bb-122d-44b3-9672-d0dc8468ca93	TCGA-BA-A6D8	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+b43b8aed-d166-4f00-8144-24ad3fe314ed	TCGA-CR-6493	Current Reformed Smoker for > 15 yrs	ever_smoker
+b4a41682-4aca-4f1d-bacd-66f5e6ec7466	TCGA-DQ-5624	Lifelong Non-Smoker	never_smoker
+b4e0c62d-f2f6-4243-9e0f-ae2ad4ca4bb8	TCGA-CN-5358	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+b8307f59-713f-404c-9a82-2450d2ad7507	TCGA-CN-A63V	Current Smoker	ever_smoker
+bdc0a7f5-d0f9-4008-bf4c-51e570ca1ebc	TCGA-QK-A6IJ	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+bf6b931e-cb2e-4cc0-b603-e9fc71fdc509	TCGA-BA-6873	Current Smoker	ever_smoker
+c0edde5e-d229-4061-8820-14afc712c5b6	TCGA-HD-A633	Lifelong Non-Smoker	never_smoker
+c1f286f6-d4a1-494a-88c8-ff8e2a3df2ce	TCGA-QK-A6IH	Lifelong Non-Smoker	never_smoker
+c4060ca5-33e0-4c83-b91c-742d75059bdc	TCGA-BA-A6DD	Current Smoker	ever_smoker
+c4ad0479-8bef-4876-b423-fe83f222a60a	TCGA-CV-7446	Current Smoker	ever_smoker
+cb99fb14-641c-4fb3-bf1d-17efb8cd982a	TCGA-BA-5149	Current Smoker	ever_smoker
+d296cdb5-a0f6-40cc-8ce7-73e4ccd176f3	TCGA-CR-7394	Current Smoker	ever_smoker
+d2ca9a4d-c14c-40c0-871c-88794a02e4aa	TCGA-CV-7180	Current Reformed Smoker for > 15 yrs	ever_smoker
+d5e136fd-b6fc-4400-88d3-30d10cbd9801	TCGA-CV-A6K0	Lifelong Non-Smoker	never_smoker
+d5eedfb5-4fa3-4a1e-ad0d-ea550b22a5ba	TCGA-CV-6433	Current Smoker	ever_smoker
+d82e6c52-9ea4-4f60-989c-cf95d464fd6f	TCGA-DQ-7592	Current Smoker	ever_smoker
+d86fd392-fa5c-4142-a647-440e6c32d478	TCGA-CQ-6224	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+d8a6383e-3320-4d2c-9017-31e8e1e8f120	TCGA-IQ-7631	Current Reformed Smoker for > 15 yrs	ever_smoker
+db873dbd-d0c0-4a19-80e5-963dcfaf823e	TCGA-T3-A92N	Current Smoker	ever_smoker
+dec3c21b-3f59-472f-8573-27b0e830aa92	TCGA-HD-A6I0	Current Reformed Smoker for > 15 yrs	ever_smoker
+dedd71b4-8537-4947-839e-90aceddd0893	TCGA-CN-4733	Lifelong Non-Smoker	never_smoker
+df37eed0-ea63-485d-a831-28d3061852bd	TCGA-CQ-A4CA	Current Smoker	ever_smoker
+e08e1d99-81e1-454a-9bda-cda92c9e22b4	TCGA-D6-A4ZB	Current Smoker	ever_smoker
+e1527704-8a97-445f-a5ee-357920cb28f7	TCGA-CQ-A4CE	Lifelong Non-Smoker	never_smoker
+e1670628-632d-4305-be07-9b9b6bea3350	TCGA-CQ-6222	Current Reformed Smoker for > 15 yrs	ever_smoker
+e2e64c5d-44ba-42f0-ab9d-ec16b21d2545	TCGA-CR-7401	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+e48c1481-e35c-49f9-9d13-a5d4085cf876	TCGA-CV-A6JE	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+e7a055d9-8d68-4e6b-bade-4b2585757210	TCGA-CQ-A4CG	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+e7d1f0dd-eec0-4670-a2ba-00ffe38c6382	TCGA-CV-6939	Lifelong Non-Smoker	never_smoker
+e7d49212-e9cb-4cd7-923a-bdfc82a4a150	TCGA-CN-6011	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+e8f0cd72-e423-45e0-ad1e-83aa7fb354e3	TCGA-C9-A480	Lifelong Non-Smoker	never_smoker
+ea93555b-daa5-439a-a13a-796917365454	TCGA-CV-6941	Current Smoker	ever_smoker
+eb611a76-eecf-452c-bfbe-ab49b362f49c	TCGA-BA-7269	Current Smoker	ever_smoker
+ee3061ec-273c-4bef-a325-35e9c469bf01	TCGA-CN-6019	Current Reformed Smoker for < or = 15 yrs	ever_smoker
+ef3ce0e5-d2e8-4616-8b1a-a78c591cf235	TCGA-CV-6959	Lifelong Non-Smoker	never_smoker
+f030e410-2585-461e-ad23-9fdf026ac06c	TCGA-CR-7382	Lifelong Non-Smoker	never_smoker
+f1099653-fd32-4459-86eb-40e0412ce2fa	TCGA-D6-A6EM	Lifelong Non-Smoker	never_smoker
+f13dfdcc-02f8-4a4c-a2fc-e6a45499bd4c	TCGA-D6-A6EN	Current Reformed Smoker, Duration Not Specified	ever_smoker
+f35a0655-7504-4bd6-a9f3-6f3e59fd84b1	TCGA-BB-A5HU	Lifelong Non-Smoker	never_smoker
+f458d21d-1854-4baf-9eb1-79c29b663804	TCGA-CR-6488	Lifelong Non-Smoker	never_smoker
+fa9f6b24-16b4-4dda-acce-bf2e186d365d	TCGA-CV-A463	Lifelong Non-Smoker	never_smoker
+fb7672f9-5dab-4204-a137-c5fb84903892	TCGA-CV-7243	Lifelong Non-Smoker	never_smoker
+fbdab01c-191c-4aef-9451-ca3afec55fa1	TCGA-D6-6823	Current Smoker	ever_smoker
+ffcf851d-7fa1-4b45-911a-a3fbd74c253a	TCGA-CN-6016	Current Smoker	ever_smoker
