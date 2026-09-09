@@ -1,4 +1,4 @@
-# Tabaquismo y expresión génica en carcinoma escamoso oral
+# Tabaquismo y expresión génica en carcinoma oral de células escamosas
 
 ## Pregunta biomédica
 
