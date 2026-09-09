@@ -1,0 +1,15 @@
+data/
+work/
+results/
+.nextflow/
+.nextflow.log*
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.sra
+*.bam
+*.bai
+.Rhistory
+.RData
+.Rproj.user/

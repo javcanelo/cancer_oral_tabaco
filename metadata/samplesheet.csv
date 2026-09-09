@@ -1,0 +1,13 @@
+sample,run,fastq_1,fastq_2
+OSCC_4-P,SRR16013054,data/raw/SRR16013054_1.fastq.gz,data/raw/SRR16013054_2.fastq.gz
+OSCC_5-P,SRR16013056,data/raw/SRR16013056_1.fastq.gz,data/raw/SRR16013056_2.fastq.gz
+OSCC_13-P,SRR16013082,data/raw/SRR16013082_1.fastq.gz,data/raw/SRR16013082_2.fastq.gz
+OSCC_13-P,SRR16013083,data/raw/SRR16013083_1.fastq.gz,data/raw/SRR16013083_2.fastq.gz
+OSCC_13-P,SRR16013084,data/raw/SRR16013084_1.fastq.gz,data/raw/SRR16013084_2.fastq.gz
+OSCC_16-P,SRR16013090,data/raw/SRR16013090_1.fastq.gz,data/raw/SRR16013090_2.fastq.gz
+OSCC_1-P,SRR16013048,data/raw/SRR16013048_1.fastq.gz,data/raw/SRR16013048_2.fastq.gz
+OSCC_2-P,SRR16013050,data/raw/SRR16013050_1.fastq.gz,data/raw/SRR16013050_2.fastq.gz
+OSCC_10-P,SRR16013070,data/raw/SRR16013070_1.fastq.gz,data/raw/SRR16013070_2.fastq.gz
+OSCC_11-P,SRR16013072,data/raw/SRR16013072_1.fastq.gz,data/raw/SRR16013072_2.fastq.gz
+OSCC_11-P,SRR16013073,data/raw/SRR16013073_1.fastq.gz,data/raw/SRR16013073_2.fastq.gz
+OSCC_11-P,SRR16013074,data/raw/SRR16013074_1.fastq.gz,data/raw/SRR16013074_2.fastq.gz

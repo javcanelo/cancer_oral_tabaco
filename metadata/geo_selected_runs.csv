@@ -1,0 +1,13 @@
+sample,patient_id,geo_accession,sra_run,condition,hpv_status,age,sex,smoking_original,group,anatomical_site
+OSCC_4-P,OSCC_4,GSM5593754,SRR16013054,Primary Tumour,negative,48,male,yes,ever_smoker,floor of mouth
+OSCC_5-P,OSCC_5,GSM5593756,SRR16013056,Primary Tumour,negative,22,male,yes,ever_smoker,tongue
+OSCC_13-P,OSCC_13,GSM5593772,SRR16013082,Primary Tumour,negative,37,male,yes,ever_smoker,tongue
+OSCC_13-P,OSCC_13,GSM5593772,SRR16013083,Primary Tumour,negative,37,male,yes,ever_smoker,tongue
+OSCC_13-P,OSCC_13,GSM5593772,SRR16013084,Primary Tumour,negative,37,male,yes,ever_smoker,tongue
+OSCC_16-P,OSCC_16,GSM55937765593776,SRR16013090,Primary Tumour,negative,42,male,yes,ever_smoker,tongue
+OSCC_1-P,OSCC_1,GSM5593748,SRR16013048,Primary Tumour,negative,50,male,no,never_smoker,tongue
+OSCC_2-P,OSCC_2,GSM5593750,SRR16013050,Primary Tumour,negative,33,male,no,never_smoker,tongue
+OSCC_10-P,OSCC_10,GSM5593766,SRR16013070,Primary Tumour,negative,46,male,no,never_smoker,tongue
+OSCC_11-P,OSCC_11,GSM5593768,SRR16013072,Primary Tumour,negative,50,female,no,never_smoker,floor of mouth
+OSCC_11-P,OSCC_11,GSM5593768,SRR16013073,Primary Tumour,negative,50,female,no,never_smoker,floor of mouth
+OSCC_11-P,OSCC_11,GSM5593768,SRR16013074,Primary Tumour,negative,50,female,no,never_smoker,floor of mouth
