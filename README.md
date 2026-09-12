@@ -6,8 +6,7 @@
 al antecedente de tabaquismo en tumores de carcinoma escamoso
 oral HPV negativo?
 
-Se explorará esta asociación mediante un workflow reproducible
-de RNA-seq y análisis posterior en R.
+Se explorará esta asociación mediante un workflow de RNA-seq y análisis posterior en R.
 
 ## Datos y diseño
 
