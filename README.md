@@ -74,8 +74,7 @@ confusión. Los resultados se interpretarán como asociaciones.
 - `workflow/`: código Nextflow y configuración.
 - `analysis/`: scripts de R.
 
-Entrega 1: diseño del proyecto. La implementación, descarga de FASTQ,
-configuración del HPC y ejecución están pendientes.
+Entrega 1: diseño del proyecto. 
 
 Los productos finales incluirán el pipeline, reportes, matriz génica,
 análisis en R, informe reproducible en Quarto y presentación.
