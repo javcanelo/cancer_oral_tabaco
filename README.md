@@ -13,16 +13,14 @@ tabaquismo mediante un análisis reproducible de RNA-seq.
 
 ## Diseño del proyecto
 
-Se utilizará un enfoque híbrido:
+Se analizarán ocho muestras tumorales de GSE184616, correspondientes
+a ocho pacientes independientes:
 
-1. FASTQ de GSE184616 para implementar y ejecutar un workflow
-   Nextflow DSL2 sobre ocho muestras tumorales.
-2. Conteos preprocesados de TCGA-HNSC para el análisis principal
-   de expresión génica y su asociación con tabaquismo.
+Las mismas ocho muestras se utilizarán para ejecutar el workflow
+y para el análisis posterior en R.
 
-Las cohortes se analizarán por separado.
-El límite N < 10 corresponde a las muestras biológicas
-procesadas mediante Nextflow.
+El análisis será exploratorio y observacional. Los resultados
+se interpretarán como asociaciones, no como efectos causales.
 
 ## Dataset para Nextflow: GSE184616
 
@@ -32,11 +30,14 @@ procesadas mediante Nextflow.
 - Tecnología: bulk RNA-seq, paired-end, stranded.
 - Plataforma: Illumina NovaSeq 6000.
 - Preparación: RNA total con eliminación de RNA ribosomal.
-- Accesión SRA del estudio: SRP338257.
+- SRA Study: SRP338257.
 - BioProject: PRJNA765370.
 - Selección: ocho tumores primarios HPV negativos.
 - Grupos: cuatro con antecedente de tabaquismo y cuatro nunca fumadores.
-- Unidad biológica: un paciente con una muestra tumoral.
+
+Los metadatos se obtuvieron de los registros de GEO GSE184616 y los identificadores de secuenciación de SRA. 
+
+Los tejidos normales no forman partes de este análisis.
 
 ## Muestras seleccionadas
 
@@ -51,7 +52,7 @@ procesadas mediante Nextflow.
 | OSCC_10-P | never_smoker | 46 | Masculino | Lengua | 1 |
 | OSCC_11-P | never_smoker | 50 | Femenino | Piso de boca | 3 |
 
-## Justificación de la selección
+## Justificación y limitaciones de la selección
 
 Cada grupo incluye tres tumores de lengua y uno de piso de boca.
 
@@ -64,10 +65,9 @@ Las edades medias son 37,3 años en ever_smoker y 44,8 años
 en never_smoker. La selección no está completamente equilibrada
 en edad y sexo.
 
-Estas ocho muestras se utilizarán principalmente para demostrar
-el funcionamiento del workflow. El análisis principal será en TCGA.
+## Archivos de entrad
 
-## Samplesheet
+### Samplesheet
 
 Archivo: metadata/samplesheet.csv.
 
@@ -77,37 +77,20 @@ Columnas:
 - fastq_1: ruta relativa del archivo R1.
 - fastq_2: ruta relativa del archivo R2.
 
-El archivo contiene doce filas de runs correspondientes a ocho
-muestras biológicas y veinticuatro archivos FASTQ previstos.
+Contiene doce filas de runs, correspondientes a ocho
+muestras biológicas y veinticuatro archivos FASTQ.
 
 OSCC_13-P y OSCC_11-P tienen tres runs cada una.
-El workflow agrupará los runs por muestra antes de cuantificar.
-No se considerarán réplicas biológicas independientes.
 
-Las rutas data/raw/<SRR>_1.fastq.gz y data/raw/<SRR>_2.fastq.gz
-son las rutas planificadas para organizar las lecturas.
+Las rutas prvistas son data/raw/<SRR>_1.fastq.gz y data/raw/<SRR>_2.fastq.gz, relativas a la raíz del proyecto.
 
-El workflow se ejecutará desde la raíz del proyecto.
-Este samplesheet corresponde al diseño del workflow propio
-y su lectura se implementará en Nextflow DSL2.
+### Metadatos para R
 
-## Cohorte principal: TCGA-HNSC
+Archivo: `metadata/sample_metadata.csv`.
 
-Se utilizarán conteos génicos preprocesados y metadatos clínicos.
+Contiene una fila por muestra biológica, con grupo, paciente,
+edad, sexo, sitio anatómico y estado HPV.
 
-Criterios de inclusión:
-- Carcinoma escamoso de cavidad oral.
-- Tumor primario.
-- HPV negativo documentado.
-- Antecedente de tabaquismo conocido.
-- Una muestra tumoral por paciente.
-
-Grupos:
-- ever_smoker: fumadores actuales y exfumadores.
-- never_smoker: pacientes que nunca fumaron.
-
-Los valores desconocidos o no informados se excluirán del contraste.
-No se asumirá HPV negativo por la sola localización en cavidad oral.
 
 ### Selección preliminar
 
