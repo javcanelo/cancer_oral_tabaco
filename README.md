@@ -59,8 +59,7 @@ Diagrama: [docs/workflow.md](docs/workflow.md).
 - Corrección por múltiples pruebas: FDR < 0,05.
 - Enriquecimiento funcional con conjuntos Hallmark.
 
-El modelo inicial será `~ group`; se evaluará sensibilidad al ajuste
-por edad. Un log2 fold change positivo indicará mayor expresión
+El modelo inicial será `~ group`. Un log2 fold change positivo indicará mayor expresión
 en ever_smoker.
 
 El análisis será exploratorio. Cuatro pacientes por grupo y el
