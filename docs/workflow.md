@@ -1,30 +1,38 @@
-# Diagrama del proyecto
+# Workflow del proyecto
+
+Workflow propio en Nextflow DSL2 para ocho muestras tumorales
+de GSE184616 y análisis posterior en R.
 
 ```mermaid
 flowchart TD
-    A["GEO: 8 tumores, 12 runs"] --> B["FASTQ paired-end"]
+    A["Samplesheet: 8 muestras y 12 runs"] --> B["Lecturas FASTQ paired-end"]
     B --> C["FastQC por run"]
-    B --> D["Agrupar lecturas por muestra"]
-    D --> E["Salmon: cuantificación por muestra"]
-    C --> F["MultiQC"]
+    C --> D{"¿Requieren trimming?"}
+    D -->|Sí| E["Trimming y revisión de calidad"]
+    D -->|No| F["Agrupación de runs por muestra"]
     E --> F
-    E --> G["Cuantificaciones de 8 muestras"]
-
-    H["TCGA-HNSC: conteos y metadatos"] --> I["Seleccionar OSCC HPV negativo"]
-    I --> J["Definir grupos de tabaquismo"]
-    J --> K["QC y filtrado en R"]
-    K --> L["Transformación: PCA y clustering"]
-    K --> M["DESeq2: expresión diferencial"]
-    M --> N["FDR y enriquecimiento de vías"]
+    F --> G["Salmon: cuantificación"]
+    R["Referencia e índice"] --> G
+    G --> H["R: tximport y resumen génico"]
+    M["Metadatos: 4 ever y 4 never"] --> I["DESeq2: filtrado y normalización"]
+    H --> I
+    I --> J["VST: PCA y clustering"]
+    I --> K["Expresión diferencial y FDR"]
+    K --> L["Enriquecimiento e interpretación"]
+    C --> Q["MultiQC"]
+    E --> Q
+    G --> Q
 ```
 
-## Implementación prevista
+## Decisiones de diseño
 
-- El procesamiento de FASTQ se implementará en Nextflow DSL2.
-- Se evaluará trimming según los resultados de calidad.
-- Los runs de una misma muestra se agruparán para cuantificarla.
-- Se usarán ambientes reproducibles y versiones documentadas.
+- La necesidad de trimming se decidirá mediante revisión de calidad
+  y se configurará explícitamente; FastQC no toma esa decisión.
+- Los runs se agruparán manteniendo R1 y R2 correctamente asociados.
+- Cada muestra biológica producirá una cuantificación.
+- MultiQC integrará los reportes de las herramientas.
+- tximport permitirá pasar de cuantificaciones de transcritos
+  a información a nivel de gen para el análisis.
 - Nextflow generará report, timeline, trace y DAG.
-- El análisis principal utilizará los datos preprocesados de TCGA.
-- La comparación con conteos publicados de GEO será opcional
-  y se realizará mediante análisis separados.
+- nf-core/rnaseq se utiliza como referencia de diseño, no como
+  pipeline ejecutado en este proyecto.

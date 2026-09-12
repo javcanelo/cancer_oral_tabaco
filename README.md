@@ -1,43 +1,26 @@
 # Tabaquismo y expresión génica en carcinoma oral de células escamosas
 
-## Pregunta biomédica
+## Pregunta y objetivo
 
 ¿Qué diferencias de expresión génica y vías biológicas se asocian
-al antecedente de tabaquismo en tejido tumoral de pacientes con
-carcinoma oral de células escamosas HPV negativo?
+al antecedente de tabaquismo en tumores de carcinoma escamoso
+oral HPV negativo?
 
-## Objetivo
+Se explorará esta asociación mediante un workflow reproducible
+de RNA-seq y análisis posterior en R.
 
-Identificar genes y vías biológicas asociados al antecedente de
-tabaquismo mediante un análisis reproducible de RNA-seq.
+## Datos y diseño
 
-## Diseño del proyecto
+- Dataset: GSE184616; Homo sapiens.
+- Tecnología: bulk RNA-seq, paired-end, stranded; Illumina NovaSeq 6000.
+- Fuente de lecturas: SRA, estudio SRP338257; BioProject PRJNA765370.
+- Selección: ocho tumores primarios informados como HPV negativos.
+- Comparación: cuatro ever_smoker y cuatro never_smoker.
+- Cada grupo incluye tres tumores de lengua y uno de piso de boca.
+- Los tejidos normales se excluyen.
 
-Se analizarán ocho muestras tumorales de GSE184616, correspondientes
-a ocho pacientes independientes:
-
-Las mismas ocho muestras se utilizarán para ejecutar el workflow
-y para el análisis posterior en R.
-
-El análisis será exploratorio y observacional. Los resultados
-se interpretarán como asociaciones, no como efectos causales.
-
-## Dataset para Nextflow: GSE184616
-
-- Organismo: Homo sapiens.
-- Enfermedad: carcinoma oral de células escamosas.
-- Dataset completo: 15 pacientes, 15 tumores y 15 tejidos normales.
-- Tecnología: bulk RNA-seq, paired-end, stranded.
-- Plataforma: Illumina NovaSeq 6000.
-- Preparación: RNA total con eliminación de RNA ribosomal.
-- SRA Study: SRP338257.
-- BioProject: PRJNA765370.
-- Selección: ocho tumores primarios HPV negativos.
-- Grupos: cuatro con antecedente de tabaquismo y cuatro nunca fumadores.
-
-Los metadatos se obtuvieron de los registros de GEO GSE184616 y los identificadores de secuenciación de SRA. 
-
-Los tejidos normales no forman partes de este análisis.
+Las mismas ocho muestras se utilizarán para el procesamiento y el
+análisis biológico.
 
 ## Muestras seleccionadas
 
@@ -52,130 +35,48 @@ Los tejidos normales no forman partes de este análisis.
 | OSCC_10-P | never_smoker | 46 | Masculino | Lengua | 1 |
 | OSCC_11-P | never_smoker | 50 | Femenino | Piso de boca | 3 |
 
-## Justificación y limitaciones de la selección
+## Entradas
 
-Cada grupo incluye tres tumores de lengua y uno de piso de boca.
+- `metadata/geo_selected_runs.csv`: identificación y metadatos de los runs.
+- `metadata/samplesheet.csv`: columnas `sample,run,fastq_1,fastq_2`;
+  doce filas de runs y veinticuatro FASTQ previstos.
+- `metadata/sample_metadata.csv`: una fila por muestra biológica,
+  con grupo, edad, sexo, sitio anatómico y HPV.
 
-Todos los pacientes con antecedente de tabaquismo disponibles
-en la tabla revisada son hombres. Solo hay tres hombres nunca
-fumadores, por lo que la selección de cuatro pacientes por grupo
-incluye una mujer en el grupo nunca fumador.
-
-Las edades medias son 37,3 años en ever_smoker y 44,8 años
-en never_smoker. La selección no está completamente equilibrada
-en edad y sexo.
-
-## Archivos de entrad
-
-### Samplesheet
-
-Archivo: metadata/samplesheet.csv.
-
-Columnas:
-- sample: identificador de la muestra biológica.
-- run: identificador de secuenciación SRA.
-- fastq_1: ruta relativa del archivo R1.
-- fastq_2: ruta relativa del archivo R2.
-
-Contiene doce filas de runs, correspondientes a ocho
-muestras biológicas y veinticuatro archivos FASTQ.
-
-OSCC_13-P y OSCC_11-P tienen tres runs cada una.
-
-Las rutas prvistas son data/raw/<SRR>_1.fastq.gz y data/raw/<SRR>_2.fastq.gz, relativas a la raíz del proyecto.
-
-### Metadatos para R
-
-Archivo: `metadata/sample_metadata.csv`.
-
-Contiene una fila por muestra biológica, con grupo, paciente,
-edad, sexo, sitio anatómico y estado HPV.
-
-
-### Selección preliminar
-
-- La descarga clínica contiene 167 pacientes.
-- Hay 163 con tabaquismo conocido: 115 ever_smoker y 48 never_smoker.
-- Se encontraron registros explícitos de HPV para 35 pacientes.
-- De ellos, 29 tienen únicamente resultados negativos en los registros revisados.
-- TCGA-BB-7872 presenta resultados negativos y positivos y se excluyó
-  provisionalmente por discordancia.
-- Al cruzar los 29 candidatos con la información de tabaquismo,
-  quedan 28 pacientes: 22 ever_smoker y 6 never_smoker.
-- Un candidato no tiene una categoría conocida de tabaquismo.
-
-La cohorte es provisional. Falta verificar el contexto y método de
-las pruebas de HPV, la precisión del sitio anatómico y la correspondencia
-con los archivos de expresión de tumor primario.
-
-El desequilibrio entre grupos y el tamaño del grupo never_smoker
-se considerarán limitaciones del análisis.
-
-La selección provisional está guardada en:
-metadata/tcga/derived/tcga_candidates.tsv. 
+Los FASTQ se organizarán en `data/raw/`. Sus rutas en el samplesheet
+son planificadas; la descarga está pendiente. 
 
 ## Workflow previsto
 
-FASTQ paired-end → FastQC → trimming opcional → agrupación de runs por muestra → Salmon → cuantificación de transcritos → MultiQC.
+FASTQ → FastQC → trimming opcional → agrupación de runs por muestra → Salmon → cuantificación de transcritos → MultiQC.
 
-El workflow se implementará en Nextflow DSL2. FastQC evaluará la calidad de las lecturas y el trimming se aplicará únicamente si el control de calidad indica presencia de adaptadores o bases de baja calidad.
+Diagrama: [docs/workflow.md](docs/workflow.md).
 
-Cuando una muestra tenga varios runs, sus lecturas se agruparán antes de la cuantificación para obtener un único resultado por muestra biológica.
+## Análisis e interpretación
 
-Salmon realizará la cuantificación a nivel de transcrito. Posteriormente, las cuantificaciones se importarán y resumirán a nivel de gen mediante `tximport` en R, utilizando una correspondencia transcrito-gen compatible con la referencia.
+- Filtrado de genes con baja expresión y normalización con DESeq2.
+- VST para PCA y clustering.
+- Expresión diferencial: ever_smoker frente a never_smoker.
+- Corrección por múltiples pruebas: FDR < 0,05.
+- Enriquecimiento funcional con conjuntos Hallmark.
 
-Se documentarán la versión del genoma y transcriptoma de referencia, la anotación, el tipo de biblioteca, las versiones de las herramientas, los parámetros y los ambientes reproducibles utilizados.
+El modelo inicial será `~ group`; se evaluará sensibilidad al ajuste
+por edad. Un log2 fold change positivo indicará mayor expresión
+en ever_smoker.
 
-MultiQC integrará los reportes de control de calidad y cuantificación. Nextflow generará además los archivos `report`, `timeline`, `trace` y `DAG`.
+El análisis será exploratorio. Cuatro pacientes por grupo y el
+desequilibrio de edad y sexo limitan la potencia y el control de
+confusión. Los resultados se interpretarán como asociaciones.
 
-Diagrama de diseño: `docs/workflow.md`.
+## Organización y estado
 
-## Análisis principal en R
+- `metadata/`: identificación de muestras y archivos de entrada.
+- `docs/`: documentación y diagrama.
+- `workflow/`: código Nextflow y configuración.
+- `analysis/`: scripts de R.
 
-- Integración de conteos y metadatos.
-- Control de calidad y filtrado de genes de baja expresión.
-- Transformación adecuada para PCA y clustering.
-- Expresión diferencial con DESeq2.
-- Evaluación del ajuste por edad y sexo.
-- Corrección por múltiples pruebas mediante FDR.
-- Enriquecimiento de vías biológicas.
+Entrega 1: diseño del proyecto. La implementación, descarga de FASTQ,
+configuración del HPC y ejecución están pendientes.
 
-El contraste será ever_smoker frente a never_smoker.
-Un log2 fold change positivo indicará mayor expresión
-en el grupo ever_smoker.
-
-Los resultados se interpretarán como asociaciones.
-El PCA y el clustering se utilizarán para explorar la estructura
-de los datos, sin asumir separación por tabaquismo.
-
-DESeq2 utilizará conteos sin normalización previa para el análisis diferencial. La matriz transformada se reservará para PCA y clustering.
-
-El ajuste por covariables dependerá de los datos disponibles, su distribución y la posibilidad de estimar el modelo.
-
-## Comparación adicional opcional
-
-Los conteos preprocesados de GSE184616 podrán utilizarse
-para explorar concordancia de genes y vías con TCGA.
-
-Las matrices de ambas cohortes no se combinarán directamente.
-Las cuantificaciones propias y publicadas de una misma muestra
-de GEO no se tratarán como observaciones independientes.
-
-## Organización del repositorio
-
-- metadata/geo_all_runs.csv: tabla completa de muestras y runs revisados.
-- metadata/geo_selected_runs.csv: metadatos de los runs seleccionados.
-- metadata/samplesheet.csv: entradas previstas para Nextflow.
-- metadata/tcga/: metadatos clínicos originales descargados de GDC.
-- metadata/tcga/derived/: tablas derivadas de tabaquismo, revisión de HPV y candidatos.
-- docs/workflow.md: diagrama de diseño.
-- workflow/: código y configuración del pipeline.
-- analysis/: scripts del análisis posterior.
-
-## Estado de desarrollo
-
-Entrega 1: diseño del proyecto.
-
-El workflow todavía no está implementado ni ejecutado.
-La descarga de lecturas, la configuración del HPC y los comandos
-de ejecución se documentarán durante la implementación.
+Los productos finales incluirán el pipeline, reportes, matriz génica,
+análisis en R, informe reproducible en Quarto y presentación.
