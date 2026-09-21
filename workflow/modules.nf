@@ -32,3 +32,15 @@ Esqueleto del pipeline RNA-seq
         salida: reporte integrado (HTML) y datos asociados
         - runir los reportes compatibles generados durante la ejecución
 */ 
+
+proces fastqc {
+    input:
+    // identificadores de muestra y run, y archivos R1 y R2
+
+    output:
+    // reportes HTML y ZIP, asociados a sus identificadores
+
+    script:
+    """
+    """
+}
