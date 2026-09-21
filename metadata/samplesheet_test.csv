@@ -1,0 +1,2 @@
+sample,run,fastq_1,fastq_2
+OSCC_4-P,SRR16013054,data/test/SRR16013054_1.fastq.gz,data/test/SRR16013054_2.fastq.gz
