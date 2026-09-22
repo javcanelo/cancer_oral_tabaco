@@ -33,12 +33,71 @@ Esqueleto del pipeline RNA-seq
         - runir los reportes compatibles generados durante la ejecución
 */ 
 
-proces fastqc {
+process fastqc {
     input:
     // identificadores de muestra y run, y archivos R1 y R2
 
     output:
     // reportes HTML y ZIP, asociados a sus identificadores
+
+    script:
+    """
+    """
+}
+
+process trimming {
+    input:
+    tuple val(sample), val(run), path(fastq_1), path(fastq_2)
+
+    output:
+    // FASTQ procesados R1 y R2, identificadores y reportes
+
+    script:
+    """
+    """
+}
+
+process fastqc_post_trimming {
+    input:
+    tuple val(sample), val(run), path(fastq_1), path(fastq_2)
+
+    output:
+    // reportes html y zip
+
+    script:
+    """
+    """
+}
+
+process agrupar_runs {
+    input:
+    // muestra y listas de FASTQ de sus runs, separadas en R1 y R2
+
+    output:
+    // conjunto de lecturas por muestra, manteniendo R1 y R2 separados
+
+    script:
+    """
+    """
+}
+
+process salmon {
+    input:
+    // identificador, R1 y R2, indice de referencia
+
+    output:
+    // carpeta de cuantificacion por muestra quant.sf y metricas
+
+    script:
+    """
+    """
+}
+process multiqc {
+    input:
+    // reportes y metricas
+
+    output:
+    // reporte html y carpeta de datos de multiqc
 
     script:
     """
