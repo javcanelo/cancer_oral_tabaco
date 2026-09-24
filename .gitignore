@@ -14,3 +14,7 @@ results/
 .RData
 .Rproj.user/
 *:Zone.Identifier
+/docs/bitacora.md
+/analysis/comparar_fastqc.Rmd
+/reference/
+*Zone.Identifier
