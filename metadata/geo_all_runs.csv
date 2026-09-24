@@ -1,4 +1,5 @@
-sample,patient_id,geo_accession,sra_run,condition,hpv_status,age,sex,smoking_original,group,anatomical_siteOSCC_1-P,OSCC_1,GSM5593748,SRR16013048,Primary Tumour,negative,50,male,no,never_smoker,tongue
+sample,patient_id,geo_accession,sra_run,condition,hpv_status,age,sex,smoking_original,group,anatomical_site
+OSCC_1-P,OSCC_1,GSM5593748,SRR16013048,Primary Tumour,negative,50,male,no,never_smoker,tongue
 OSCC_2-P,OSCC_2,GSM5593750,SRR16013050,Primary Tumour,negative,33,male,no,never_smoker,tongue
 OSCC_3-P,OSCC_3,GSM5593752,SRR16013052,Primary Tumour,negative,45,male,yes,smoker,gingivolingual sulcus
 OSCC_4-P,OSCC_4,GSM5593754,SRR16013054,Primary Tumour,negative,48,male,yes,smoker,floor of mouth

@@ -1,0 +1,9 @@
+sample,patient_id,group,age,sex,anatomical_site,hpv_status
+OSCC_4-P,OSCC_4,ever_smoker,48,male,floor of mouth,negative
+OSCC_5-P,OSCC_5,ever_smoker,22,male,tongue,negative
+OSCC_13-P,OSCC_13,ever_smoker,37,male,tongue,negative
+OSCC_16-P,OSCC_16,ever_smoker,42,male,tongue,negative
+OSCC_1-P,OSCC_1,never_smoker,50,male,tongue,negative
+OSCC_2-P,OSCC_2,never_smoker,33,male,tongue,negative
+OSCC_10-P,OSCC_10,never_smoker,46,male,tongue,negative
+OSCC_11-P,OSCC_11,never_smoker,50,female,floor of mouth,negative
