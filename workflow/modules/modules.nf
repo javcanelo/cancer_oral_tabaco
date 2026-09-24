@@ -33,7 +33,7 @@ Esqueleto del pipeline RNA-seq
         - runir los reportes compatibles generados durante la ejecución
 */ 
 
-process fastqc {
+process _fastqc {
     input:
     // identificadores de muestra y run, y archivos R1 y R2
 

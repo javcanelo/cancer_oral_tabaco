@@ -1,9 +1,19 @@
+nextflow.enable.dsl = 2
+
+include { control_calidad } from './subworkflows/control_calidad'
+
 workflow {
-    runs = channel.fromPath(params.samplesheet)
+    runs = channel
+        .fromPath(params.samplesheet)
         .splitCsv(header: true)
         .map { row ->
-            tuple(row.sample, row.run, row.fastq_1, row.fastq_2)
+            tuple(
+                row.sample, 
+                row.run, 
+                file(row.fastq_1, checkIfExists: true), 
+                file(row.fastq_2, checkIfExists: true)
+            )
         }
 
-    runs.view()
+    control_calidad(runs)
 }
