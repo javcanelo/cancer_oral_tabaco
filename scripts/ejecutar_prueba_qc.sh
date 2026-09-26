@@ -3,6 +3,8 @@ set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
+bash scripts/ejecutar_pipeline.sh metadata/samplesheet_test.csv
+
 salida="results/prueba_preprocesamiento/$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$salida/reportes"
 
