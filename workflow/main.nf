@@ -47,7 +47,7 @@ workflow {
     trimmed_qc_files = control_calidad.out.trimmed_reports
         .map { sample, run, html, zip -> zip }
 
-    fastp_files = control_calidad.out.trimmed_reports
+    fastp_files = control_calidad.out.trimming_reports
         .map { sample, run, html, json -> json }
 
     salmon_files = salmon_quant.out.quantifications
