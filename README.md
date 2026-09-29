@@ -2,7 +2,7 @@
 
 ## Entrega 2
 
-La ejecución documentada procesó subconjunto de las 8 muestras y completó 45 tareas sin errores, generanddo 8 cuantificaciones y un reporte integrado de MultiQC.
+La ejecución documentada procesó subconjunto de las 8 muestras y completó 45 tareas sin errores, generando 8 cuantificaciones y un reporte integrado de MultiQC.
 
 ### Informe
 
@@ -20,6 +20,17 @@ La ejecución documentada procesó subconjunto de las 8 muestras y completó 45 
 - [Resumen de cuantificación por muestra](docs/evidencia_entrega_2/20260928_121044/resumen_entrega2/resumen_muestras.csv)
 - [Samplesheet utilizado en la ejecución](docs/evidencia_entrega_2/20260928_121044/samplesheet.csv)
 - [Versiones utilizadas](docs/evidencia_entrega_2/20260928_121044/versiones.txt)
+
+### Implementación y reproducción
+
+- [Workflow principal de Nextflow](workflow/main.nf)
+- [Módulos del pipeline](workflow/modules/)
+- [Configuración](nextflow.config)
+- [Ambiente de software](environment.yml)
+- [Script de ejecución](scripts/ejecutar_pipeline.sh)
+- [Samplesheet de la prueba integrada](metadata/samplesheet_test_all.csv)
+
+Las instrucciones de ejecución se encuentran más abajo en este README.
 
 ## Pregunta y objetivo
 
