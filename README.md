@@ -6,7 +6,7 @@ La ejecución documentada procesó subconjunto de las 8 muestras y completó 45 
 
 ### Informe
 
-- [Informe Entrega 2 en PDF](docs/informes_entregas/entrega_2.pdf)
+- [Descargar informe de Entrega 2 en PDF](https://github.com/javcanelo/cancer_oral_tabaco/raw/refs/heads/master/docs/informes_entregas/entrega_2.pdf)
 - [Fuente del informe en Quarto](docs/informes_entregas/entrega_2.qmd)
 - [Diagrama del workflow](docs/informes_entregas/figuras/entrega_2/figura7.png)
 
