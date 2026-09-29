@@ -48,3 +48,4 @@ nextflow run workflow/main.nf \
     -with-report "$salida/reportes/report.html" \
     -with-timeline "$salida/reportes/timeline.html" \
     -with-trace "$salida/reportes/trace.tsv"
+    -with-dag "$salida/reportes/dag.dot"

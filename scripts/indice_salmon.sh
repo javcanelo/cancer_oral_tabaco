@@ -5,8 +5,9 @@ mkdir -p reference docs/reproducibilidad
 
 if [ ! -s reference/gencode.v50.transcripts.fa.gz ]; then
     curl -fL --retry 3 \
-        https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_47/gencode.v47.transcripts.fa.gz \
-        -o reference/gencode.v50.transcripts.fa.gz
+
+https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_50/gencode.v50.transcripts.fa.gz \
+    -o reference/gencode.v50.transcripts.fa.gz
 fi
 
 gzip -t reference/gencode.v50.transcripts.fa.gz

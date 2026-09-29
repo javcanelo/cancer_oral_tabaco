@@ -1,0 +1,11 @@
+
+      N E X T F L O W
+      version 26.04.6 build 12646
+      created 09-07-2026 18:49 UTC (14:49 GMT-03:00)
+      cite doi:10.1038/nbt.3820
+      http://nextflow.io
+
+FastQC v0.12.1
+fastp 1.3.7
+salmon 2.7.0
+multiqc, version 1.35

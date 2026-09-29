@@ -1,3 +1,37 @@
+---
+lang: es
+format:
+  html:
+    embed-resources: true
+---
+
+<style>
+@media print {
+    h1, h2, h3, h4 {
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+
+    p {
+        orphans: 3;
+        widows: 3;
+    }
+
+    tr, img {
+        break-inside: avoid;
+    }
+}
+
+@page {
+  @bottom-center {
+    content: "Página " counter(page) " de " counter(pages);
+    font-family: Arial, sans-serif;
+    font-size: 9pt;
+    color: #666;
+  }
+}
+</style>
+
 # Proyecto 1. Tabaquismo y expresión génica en carcinoma oral de células escamosas
 
 **Entrega 2 - Pipeline funcional de RNA-seq**  
@@ -48,8 +82,12 @@ El flujo `main.nf` lee el samplesheet (`sample,run,fastq_1,fastq_2`). FastQC ini
 
 Finalmente, MultiQC integra los reportes de FastQC, fastp y Salmon.
 
+
+
 ![Procesos y dependencias del workflow](figuras/entrega_2/figura7.png)
 *Figura 1. Grafo de procesos y dependencias del workflow integrado. El preprocesamiento se realiza por run y la cuantificación por muestra biológica.*
+
+{{< pagebreak >}}
 
 ### 3.2. Ambiente y versiones 
 
@@ -98,6 +136,8 @@ No se realizaron comparaciones con y sin las correcciones de sesgo, por lo que n
 
 Para las muestras con múltiples runs, se entregaron conjuntamente las listas de archivos R1 y R2 correspondientes, manteniendo el mismo orden entre ambas. De esta manera se obtuvo una cuantificación por muestra biológica, sin tratar los runs como réplicas independientes.
 
+{{< pagebreak >}}
+
 ### 3.5. Recursos
 
 | Proceso | CPUs por tarea | Configuración adicional |
@@ -123,6 +163,8 @@ La primera prueba se realizó con OSCC_4-P para comprobar la ejecución de FastQ
 Se conservó el 92,77% de los pares. FastQC posterior mostró una disminución de la señal de adaptadores, aunque persistieron advertencias y fallos en otros módulos.
 
 La prueba permitió comprobar el funcionamiento del preprocesamiento y observar su efecto sobre el subconjunto. Los parámetros se utilizaron posteriormente en la prueba integrada de los 12 runs. Estos resultados no constituyen una evaluación de la calidad de la biblioteca completa.
+
+{{< pagebreak >}}
 
 ## 5. Prueba integrada del pipeline
 
@@ -151,6 +193,8 @@ La ejecución finalizó con **45 tareas completadas**, sin tareas fallidas ni re
 | multiqc | 1 | 10,3 s | 238 MB |
 
 El preprocesamiento se desarrolló en aproximadamente 1 minuto. Salmon concentró la mayor parte del tiempo, con las muestras procesadas secuencialmente. Las muestras de un run requirieron alrededor de 2 minutos y las de tres entre 4-5 minutos.
+
+{{< pagebreak >}}
 
 ### 5.3. Verificación de las salidas
 
@@ -192,6 +236,7 @@ Las tasas de mapeo se incluyen como métricas de salida de la prueba. Sus difere
 ### 5.5. Integración de reportes
 
 MultiQC incorporó:
+
 - 48 reportes FastQC: 24 previos y 24 posteriores al procesamiento.
 - 12 reportes fastp: uno por run.
 - 8 resultados Salmon: uno por muestra.
@@ -215,6 +260,8 @@ Los tamaños corresponden a los archivos locales de la prueba y se expresan en M
 | **Total de resultados, incluidos reportes y resúmenes** | **467,22 MiB** |
 
 Estos valores describen el almacenamiento de la prueba. No permiten estimar directamente el espacio total que requerirá el procesamiento de las bibliotecas completas.
+
+{{< pagebreak >}}
 
 ### 5.7. Trazabilidad y evidencia de ejecución
 

@@ -1,0 +1,99 @@
+digraph "figura7" {
+rankdir=TB;
+v0 [shape=point,label="",fixedsize=true,width=0.1,xlabel="channel.fromPath"];
+v1 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="splitCsv"];
+v0 -> v1;
+
+v1 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="splitCsv"];
+v2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v1 -> v2;
+
+v2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v3 [label="control_calidad:fastqc"];
+v2 -> v3 [label="runs"];
+
+v3 [label="control_calidad:fastqc"];
+v11 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v3 -> v11 [label="raw_reports"];
+
+v2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v4 [label="control_calidad:fastp"];
+v2 -> v4 [label="runs"];
+
+v4 [label="control_calidad:fastp"];
+v5 [label="control_calidad:fastqc_post_trimming"];
+v4 -> v5 [label="trimmed_reads"];
+
+v4 [label="control_calidad:fastp"];
+v13 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v4 -> v13 [label="trimming_reports"];
+
+v5 [label="control_calidad:fastqc_post_trimming"];
+v12 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v5 -> v12 [label="trimmed_reports"];
+
+v4 [label="control_calidad:fastp"];
+v6 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v4 -> v6 [label="trimmed_reads"];
+
+v6 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v7 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="groupTuple"];
+v6 -> v7;
+
+v7 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="groupTuple"];
+v8 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v7 -> v8;
+
+v8 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v10 [label="salmon_quant"];
+v8 -> v10 [label="reads_by_sample"];
+
+v9 [shape=point,label="",fixedsize=true,width=0.1];
+v10 [label="salmon_quant"];
+v9 -> v10 [label="index_ch"];
+
+v10 [label="salmon_quant"];
+v14 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v10 -> v14;
+
+v11 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v15 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+v11 -> v15 [label="raw_qc_files"];
+
+v12 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v15 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+v12 -> v15 [label="trimmed_qc_files"];
+
+v13 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v15 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+v13 -> v15 [label="fastp_files"];
+
+v14 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v15 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+v14 -> v15 [label="salmon_files"];
+
+v15 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+v16 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="flatten"];
+v15 -> v16;
+
+v16 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="flatten"];
+v17 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="unique"];
+v16 -> v17;
+
+v17 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="unique"];
+v18 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v17 -> v18;
+
+v18 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v19 [label="multiqc"];
+v18 -> v19 [label="all_reports"];
+
+v19 [label="multiqc"];
+v21 [shape=point];
+v19 -> v21;
+
+v19 [label="multiqc"];
+v20 [shape=point];
+v19 -> v20;
+
+}

@@ -1,0 +1,13 @@
+sample,run,fastq_1,fastq_2,subset_method,requested_spots
+OSCC_5-P,SRR16013056,data/test_multirun/SRR16013056_1.fastq.gz,data/test_multirun/SRR16013056_2.fastq.gz,first_spots,100000
+OSCC_13-P,SRR16013082,data/test_multirun/SRR16013082_1.fastq.gz,data/test_multirun/SRR16013082_2.fastq.gz,first_spots,100000
+OSCC_13-P,SRR16013083,data/test_multirun/SRR16013083_1.fastq.gz,data/test_multirun/SRR16013083_2.fastq.gz,first_spots,100000
+OSCC_13-P,SRR16013084,data/test_multirun/SRR16013084_1.fastq.gz,data/test_multirun/SRR16013084_2.fastq.gz,first_spots,100000
+OSCC_16-P,SRR16013090,data/test_multirun/SRR16013090_1.fastq.gz,data/test_multirun/SRR16013090_2.fastq.gz,first_spots,100000
+OSCC_1-P,SRR16013048,data/test_multirun/SRR16013048_1.fastq.gz,data/test_multirun/SRR16013048_2.fastq.gz,first_spots,100000
+OSCC_2-P,SRR16013050,data/test_multirun/SRR16013050_1.fastq.gz,data/test_multirun/SRR16013050_2.fastq.gz,first_spots,100000
+OSCC_10-P,SRR16013070,data/test_multirun/SRR16013070_1.fastq.gz,data/test_multirun/SRR16013070_2.fastq.gz,first_spots,100000
+OSCC_11-P,SRR16013072,data/test_multirun/SRR16013072_1.fastq.gz,data/test_multirun/SRR16013072_2.fastq.gz,first_spots,100000
+OSCC_11-P,SRR16013073,data/test_multirun/SRR16013073_1.fastq.gz,data/test_multirun/SRR16013073_2.fastq.gz,first_spots,100000
+OSCC_11-P,SRR16013074,data/test_multirun/SRR16013074_1.fastq.gz,data/test_multirun/SRR16013074_2.fastq.gz,first_spots,100000
+OSCC_4-P,SRR16013054,data/test_multirun/SRR16013054_1.fastq.gz,data/test_multirun/SRR16013054_2.fastq.gz,first_spots,100000

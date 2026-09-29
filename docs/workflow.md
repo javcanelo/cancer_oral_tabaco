@@ -5,23 +5,16 @@ de GSE184616 y análisis posterior en R.
 
 ```mermaid
 flowchart TD
-    A["Samplesheet: 8 muestras y 12 runs"] --> B["Lecturas FASTQ paired-end"]
-    B --> C["FastQC por run"]
-    C --> D{"¿Requieren trimming?"}
-    D -->|Sí| E["Trimming y revisión de calidad"]
-    D -->|No| F["Agrupación de runs por muestra"]
-    E --> F
-    F --> G["Salmon: cuantificación"]
-    R["Referencia e índice"] --> G
-    G --> H["R: tximport y resumen génico"]
-    M["Metadatos: 4 ever y 4 never"] --> I["DESeq2: filtrado y normalización"]
-    H --> I
-    I --> J["VST: PCA y clustering"]
-    I --> K["Expresión diferencial y FDR"]
-    K --> L["Enriquecimiento e interpretación"]
-    C --> Q["MultiQC"]
-    E --> Q
-    G --> Q
+    A[Samplesheet y FASTQ por run] --> B[FastQC inicial]
+    A --> C[fastp]
+    C --> D[FastQC posterior]
+    C --> E[Agrupación de runs por muestra]
+    E --> F[Salmon]
+    R[Índice de referencia] --> F
+    B --> G[MultiQC]
+    C --> G
+    D --> G
+    F --> G
 ```
 
 ## Decisiones de diseño
