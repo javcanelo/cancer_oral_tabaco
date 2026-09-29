@@ -1,18 +1,19 @@
 # Tabaquismo y expresión génica en carcinoma oral de células escamosas
 
-## Entrega 2
+## Estado actual: Entrega 2
 
-La ejecución documentada procesó subconjunto de las 8 muestras y completó 45 tareas sin errores, generando 8 cuantificaciones y un reporte integrado de MultiQC.
+La ejecución documentada procesó subconjuntos de los 12 runs de las 8 muestras y completó 45 tareas sin errores, generando 8 cuantificaciones y un reporte integrado de MultiQC.
 
-### Informe
+### [Informe y archivos fuente](docs/informes_entregas/)
 
 - [Descargar informe de Entrega 2 en PDF](https://github.com/javcanelo/cancer_oral_tabaco/raw/refs/heads/master/docs/informes_entregas/entrega_2.pdf)
 - [Fuente del informe en Quarto](docs/informes_entregas/entrega_2.qmd)
 - [Diagrama del workflow](docs/informes_entregas/figuras/entrega_2/figura7.png)
 
-### Evidencia de ejecución (28 de septiembre de 2026)
+### [Evidencia de ejecución (28 de septiembre de 2026)](docs/evidencia_entrega_2/20260928_121044/)
 
-- [Carpeta completa de evidencia](docs/evidencia_entrega_2/20260928_121044/)
+Los reportes HTML se descargan y se abren en el navegador. El trace, las tablas y los archivos de texto pueden consultarse directamente en GitHub.
+
 - [Trace: estado y recursos de las 45 tareas](docs/evidencia_entrega_2/20260928_121044/nextflow/trace.tsv)
 - [Report: resumen de ejecución de Nextflow](docs/evidencia_entrega_2/20260928_121044/nextflow/report.html)
 - [Timeline: distribución temporal de las tareas](docs/evidencia_entrega_2/20260928_121044/nextflow/timeline.html)
@@ -21,7 +22,7 @@ La ejecución documentada procesó subconjunto de las 8 muestras y completó 45 
 - [Samplesheet utilizado en la ejecución](docs/evidencia_entrega_2/20260928_121044/samplesheet.csv)
 - [Versiones utilizadas](docs/evidencia_entrega_2/20260928_121044/versiones.txt)
 
-### Implementación y reproducción
+### [Implementación del pipeline](workflow/)
 
 - [Workflow principal de Nextflow](workflow/main.nf)
 - [Módulos del pipeline](workflow/modules/)
