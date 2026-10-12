@@ -1,0 +1,902 @@
+---
+title: "Entrega 3 — Análisis preliminar"
+subtitle: "Tabaquismo y expresión génica en carcinoma oral"
+date: "13 de octubre de 2026"
+lang: es
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: hide
+    df_print: paged
+params:
+  proyecto: "~/cancer_oral_tabaco"
+  resultados: "/mnt/d/oscc_completo/results/lote_20261005_091823"
+---
+
+```{r setup, include=FALSE}
+paquetes <- c("ggplot2", "jsonlite", "knitr")
+faltantes <- paquetes[
+  !vapply(paquetes, requireNamespace, logical(1), quietly = TRUE)
+]
+if (length(faltantes)) {
+  stop("Faltan paquetes: ", paste(faltantes, collapse = ", "))
+}
+
+library(ggplot2)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = TRUE,
+  error = FALSE,
+  cache = FALSE,
+  fig.width = 8,
+  fig.height = 5,
+  dpi = 150
+)
+
+proyecto <- normalizePath(
+  path.expand(params$proyecto), mustWork = TRUE
+)
+resultados <- path.expand(params$resultados)
+
+paleta <- c(
+  never_smoker = "#287C8E",
+  ever_smoker = "#C65A46"
+)
+
+theme_set(
+  theme_minimal(base_size = 12) +
+    theme(
+      panel.grid.minor = element_blank(),
+      legend.position = "bottom"
+    )
+)
+```
+
+# Pregunta y objetivo
+
+¿Qué diferencias de expresión génica y vías biológicas se asocian
+al antecedente de tabaquismo en tumores primarios de carcinoma oral
+de células escamosas HPV negativos?
+
+El análisis principal considera ocho muestras del estudio GSE184616:
+cuatro pacientes con antecedente de tabaquismo (`ever_smoker`) y
+cuatro que nunca fumaron (`never_smoker`).
+
+Esta entrega presenta el avance del procesamiento y los resultados
+preliminares disponibles. Las secciones pendientes no se interpretan
+como análisis completados.
+
+# Diseño y metadatos
+
+## Lectura y correspondencia de muestras
+
+La unidad biológica es el paciente. Los runs de secuenciación de un mismo
+paciente no se consideran réplicas biológicas independientes.
+
+```{r metadatos}
+metadata <- read.csv(
+  file.path(proyecto, "metadata", "sample_metadata.csv"),
+  stringsAsFactors = FALSE,
+  check.names = FALSE
+)
+
+runs <- read.csv(
+  file.path(proyecto, "metadata", "samplesheet.csv"),
+  stringsAsFactors = FALSE,
+  check.names = FALSE
+)
+
+columnas <- c(
+  "sample", "patient_id", "group", "age",
+  "sex", "anatomical_site", "hpv_status"
+)
+stopifnot(all(columnas %in% names(metadata)))
+stopifnot(all(c("sample", "run") %in% names(runs)))
+
+esperadas <- c(
+  "OSCC_4-P", "OSCC_5-P", "OSCC_13-P", "OSCC_16-P",
+  "OSCC_1-P", "OSCC_2-P", "OSCC_10-P", "OSCC_11-P"
+)
+
+stopifnot(
+  nrow(metadata) == 8,
+  !anyNA(metadata$sample),
+  !anyNA(metadata$patient_id),
+  !anyDuplicated(metadata$sample),
+  !anyDuplicated(metadata$patient_id),
+  setequal(metadata$sample, esperadas),
+  !anyDuplicated(runs$run),
+  setequal(runs$sample, metadata$sample),
+  nrow(runs) == 12,
+  all(metadata$group %in% c("never_smoker", "ever_smoker")),
+  all(metadata$hpv_status == "negative")
+)
+
+metadata$group <- factor(
+  metadata$group,
+  levels = c("never_smoker", "ever_smoker")
+)
+metadata$sex <- factor(metadata$sex)
+metadata$anatomical_site <- factor(metadata$anatomical_site)
+
+metadata$age <- as.numeric(metadata$age)
+stopifnot(all(is.finite(metadata$age)))
+stopifnot(all(table(metadata$group) == 4))
+
+numero_runs <- table(runs$sample)
+metadata$n_runs <- as.integer(numero_runs[metadata$sample])
+
+knitr::kable(
+  metadata,
+  caption = "Muestras seleccionadas y características clínicas."
+)
+```
+
+## Descripción de los grupos
+
+```{r resumen-grupos}
+resumen <- do.call(
+  rbind,
+  lapply(levels(metadata$group), function(grupo) {
+    d <- metadata[metadata$group == grupo, ]
+
+    data.frame(
+      grupo = grupo,
+      pacientes = nrow(d),
+      edad_mediana = median(d$age),
+      edad_minima = min(d$age),
+      edad_maxima = max(d$age),
+      hombres = sum(d$sex == "male"),
+      mujeres = sum(d$sex == "female"),
+      runs = sum(d$n_runs)
+    )
+  })
+)
+
+knitr::kable(
+  resumen,
+  caption = "Descripción de los grupos antes del análisis de expresión."
+)
+```
+
+```{r edades, fig.cap="Cada punto representa un paciente. La edad se describe como posible factor de confusión."}
+ggplot(metadata, aes(group, age, colour = group)) +
+  geom_point(
+    position = position_jitter(width = 0.08, height = 0, seed = 42),
+    size = 3
+  ) +
+  scale_colour_manual(values = paleta) +
+  labs(x = NULL, y = "Edad (años)") +
+  guides(colour = "none")
+```
+
+```{r composicion-clinica}
+knitr::kable(
+  as.data.frame.matrix(table(metadata$group, metadata$sex)),
+  caption = "Distribución de sexo por grupo."
+)
+
+knitr::kable(
+  as.data.frame.matrix(
+    table(metadata$group, metadata$anatomical_site)
+  ),
+  caption = "Distribución del sitio anatómico por grupo."
+)
+```
+
+El balance de cuatro pacientes por grupo no garantiza comparabilidad
+en todas las características clínicas. La edad, el sexo y el sitio
+anatómico se considerarán al interpretar los resultados.
+
+# Procesamiento bioinformático
+
+El workflow implementado sigue la secuencia:
+
+**FastQC inicial → fastp → FastQC posterior → Salmon → MultiQC.**
+
+FastQC y fastp operan por run. Los FASTQ recortados de los runs
+correspondientes a un mismo paciente se entregan conjuntamente a Salmon,
+que genera una cuantificación por muestra.
+
+Las estimaciones de transcritos se agregarán a genes mediante tximport
+y una correspondencia compatible con la referencia GENCODE v50 utilizada.
+
+## Disponibilidad de archivos
+
+Esta tabla informa la presencia de archivos publicados en el lote
+seleccionado. No sustituye la revisión del estado final de Nextflow.
+
+```{r disponibilidad}
+estado <- data.frame(
+  muestra = metadata$sample,
+  grupo = metadata$group,
+  fastp_disponibles = vapply(metadata$sample, function(s) {
+    rr <- runs$run[runs$sample == s]
+    sum(file.exists(
+      file.path(resultados, s, "fastp", paste0(rr, "_fastp.json"))
+    ))
+  }, integer(1)),
+  fastp_esperados = metadata$n_runs,
+  quant_sf = file.exists(
+    file.path(
+      resultados, metadata$sample, "salmon",
+      metadata$sample, "quant.sf"
+    )
+  ),
+  multiqc_html = file.exists(
+    file.path(
+      resultados, metadata$sample, "multiqc",
+      "multiqc_report.html"
+    )
+  )
+)
+
+knitr::kable(
+  estado,
+  caption = "Archivos disponibles en el lote de procesamiento seleccionado."
+)
+```
+
+# Resultados preliminares de control de calidad
+
+## Métricas de fastp
+
+Se leen exclusivamente los reportes del lote de FASTQ completos
+seleccionado. No se incorporan reportes de las pruebas con subconjuntos.
+
+En datos paired-end, `total_reads` cuenta ambos mates.
+El número de pares se obtiene dividiendo ese valor entre dos.
+
+```{r importar-fastp}
+filas_qc <- list()
+
+for (i in seq_len(nrow(runs))) {
+  muestra <- runs$sample[i]
+  run <- runs$run[i]
+
+  archivo <- file.path(
+    resultados, muestra, "fastp", paste0(run, "_fastp.json")
+  )
+
+  if (!file.exists(archivo)) next
+
+  j <- jsonlite::fromJSON(archivo)
+  antes <- j$summary$before_filtering
+  despues <- j$summary$after_filtering
+
+  stopifnot(
+    antes$total_reads > 0,
+    despues$total_reads >= 0,
+    despues$total_reads <= antes$total_reads,
+    antes$total_reads %% 2 == 0,
+    despues$total_reads %% 2 == 0
+  )
+
+  filas_qc[[length(filas_qc) + 1L]] <- data.frame(
+    sample = muestra,
+    run = run,
+    pares_entrada = antes$total_reads / 2,
+    pares_retenidos = despues$total_reads / 2,
+    retencion_pct = 100 * despues$total_reads / antes$total_reads,
+    q30_antes_pct = 100 * antes$q30_rate,
+    q30_despues_pct = 100 * despues$q30_rate,
+    gc_antes_pct = 100 * antes$gc_content,
+    gc_despues_pct = 100 * despues$gc_content,
+    archivo = normalizePath(archivo)
+  )
+}
+
+qc <- if (length(filas_qc)) {
+  do.call(rbind, filas_qc)
+} else {
+  data.frame()
+}
+```
+
+```{r tabla-fastp}
+if (nrow(qc)) {
+  knitr::kable(
+    qc[, names(qc) != "archivo"],
+    digits = 2,
+    caption = "Métricas de fastp por run disponible."
+  )
+} else {
+  cat("Todavía no hay reportes fastp disponibles en el lote seleccionado.")
+}
+```
+
+```{r figura-retencion, fig.cap="Pares conservados y descartados por fastp. Cada barra corresponde a un run."}
+if (nrow(qc)) {
+  cantidades <- rbind(
+    data.frame(
+      run = qc$run,
+      categoria = "Conservados",
+      pares = qc$pares_retenidos
+    ),
+    data.frame(
+      run = qc$run,
+      categoria = "Descartados",
+      pares = qc$pares_entrada - qc$pares_retenidos
+    )
+  )
+
+  ggplot(cantidades, aes(run, pares / 1e6, fill = categoria)) +
+    geom_col() +
+    scale_fill_manual(
+      values = c(Conservados = "#287C8E", Descartados = "#C65A46")
+    ) +
+    labs(x = "Run", y = "Millones de pares", fill = NULL) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+}
+```
+
+```{r figura-q30, fig.cap="Proporción de bases Q30 antes y después del filtrado."}
+if (nrow(qc)) {
+  calidad <- rbind(
+    data.frame(run = qc$run, etapa = "Antes", q30 = qc$q30_antes_pct),
+    data.frame(run = qc$run, etapa = "Después", q30 = qc$q30_despues_pct)
+  )
+  calidad$etapa <- factor(calidad$etapa, levels = c("Antes", "Después"))
+
+  ggplot(calidad, aes(etapa, q30, group = run, colour = run)) +
+    geom_line() +
+    geom_point(size = 3) +
+    scale_y_continuous(limits = c(0, 100)) +
+    labs(x = NULL, y = "Bases Q30 (%)", colour = "Run")
+}
+```
+
+El aumento de Q30 y la retención de pares describen el efecto del
+filtrado. No demuestran por sí solos una mejora de la cuantificación
+ni diferencias de expresión entre grupos.
+
+## Cuantificación y mapeo
+
+Pendiente de incorporar las métricas de Salmon de las muestras completas.
+
+Se contrastará el número de fragmentos procesados por Salmon con la suma
+de pares conservados por fastp para todos los runs de cada muestra.
+
+# Plan de análisis estadístico
+
+## Importación y filtrado
+
+Se utilizará tximport para importar las cuantificaciones de Salmon.
+El objeto de DESeq2 se construirá mediante `DESeqDataSetFromTximport`.
+
+Los archivos de entrada deberán corresponder a una cuantificación
+por paciente, con las columnas alineadas explícitamente con los metadatos.
+
+Como criterio inicial de prefiltrado se propone conservar genes con
+conteos estimados de al menos 10 en un mínimo de cuatro muestras.
+El criterio se fijará antes de evaluar los resultados diferenciales.
+
+## Exploración de muestras
+
+Se aplicará una transformación estabilizadora de la varianza para:
+
+- PCA, inicialmente con los 500 genes de mayor varianza.
+- Mapa de distancias entre muestras.
+- Revisión de la relación de los componentes con tabaquismo,
+  edad, sexo y sitio anatómico.
+
+El PCA se calculará sobre expresión transformada, centrando los genes
+sin escalarlos a varianza unitaria. Las etiquetas clínicas se utilizarán
+para interpretar los componentes, no para calcularlos.
+
+No se eliminarán muestras únicamente porque aparezcan separadas en el PCA.
+
+## Expresión diferencial
+
+El modelo principal será `~ group`.
+
+El contraste será `ever_smoker` frente a `never_smoker`.
+Un log2 fold change positivo indicará mayor expresión en ever_smoker.
+
+Se utilizará FDR < 0,05. Se presentarán tamaños de efecto, incertidumbre
+y valores ajustados, sin limitar la interpretación a la significancia.
+
+Las covariables se describirán como posibles factores de confusión.
+Cualquier modelo de sensibilidad se justificará considerando los ocho
+pacientes disponibles y la identificabilidad del diseño.
+
+## Interpretación funcional
+
+Se propone evaluar conjuntos Hallmark utilizando una lista ordenada
+por el estadístico del contraste, con identificadores compatibles.
+
+Este enfoque permitirá explorar patrones funcionales sin depender
+exclusivamente de una lista de genes que supere un umbral de FDR.
+
+Se documentarán la versión de los conjuntos, el método utilizado,
+la cobertura de identificadores y la corrección por múltiples pruebas.
+
+# Importación de las cuantificaciones propias de Salmon
+
+Se realiza una prueba de agregación de transcritos a genes con OSCC_4-P.
+Esta importación no constituye un análisis diferencial: todavía falta
+disponer de las cuantificaciones de las ocho muestras.
+
+La correspondencia transcrito–gen se extrae del mismo FASTA GENCODE v50
+utilizado para construir el índice de Salmon. Se conservan las versiones
+de los identificadores.
+
+## Construcción de la correspondencia transcrito–gen
+
+```{r correspondencia-gencode}
+library(tximport)
+
+fasta <- file.path(
+  proyecto, "reference", "gencode.v50.transcripts.fa.gz"
+)
+stopifnot(file.exists(fasta))
+
+# Leer por bloques para no cargar todas las secuencias en memoria.
+extraer_cabeceras <- function(archivo) {
+  conexion <- gzfile(archivo, open = "rt")
+  on.exit(close(conexion))
+
+  bloques <- list()
+
+  repeat {
+    lineas <- readLines(conexion, n = 10000, warn = FALSE)
+    if (!length(lineas)) break
+
+    cabeceras <- lineas[startsWith(lineas, ">")]
+    if (length(cabeceras)) {
+      bloques[[length(bloques) + 1L]] <- substring(cabeceras, 2)
+    }
+  }
+
+  unlist(bloques, use.names = FALSE)
+}
+
+cabeceras <- extraer_cabeceras(fasta)
+stopifnot(length(cabeceras) > 0)
+
+# En estas cabeceras GENCODE:
+# primer campo = transcrito; segundo campo = gen.
+campos <- strsplit(cabeceras, "|", fixed = TRUE)
+stopifnot(all(lengths(campos) >= 2))
+
+tx2gene <- data.frame(
+  transcript_id = vapply(campos, `[`, character(1), 1),
+  gene_id = vapply(campos, `[`, character(1), 2),
+  stringsAsFactors = FALSE
+)
+
+stopifnot(
+  all(grepl("^ENST", tx2gene$transcript_id)),
+  all(grepl("^ENSG", tx2gene$gene_id)),
+  !anyDuplicated(tx2gene$transcript_id)
+)
+
+ruta_tx2gene <- file.path(
+  proyecto, "reference", "tx2gene_gencode_v50.tsv"
+)
+
+write.table(
+  tx2gene,
+  ruta_tx2gene,
+  sep = "\t",
+  quote = FALSE,
+  row.names = FALSE
+)
+
+knitr::kable(
+  data.frame(
+    transcritos_referencia = nrow(tx2gene),
+    genes_referencia = length(unique(tx2gene$gene_id))
+  ),
+  caption = "Correspondencia obtenida del FASTA utilizado para el índice."
+)
+
+rm(cabeceras, campos)
+```
+
+## Importación de OSCC_4-P
+
+Se comprueba que todos los transcritos de quant.sf tengan una
+correspondencia en la referencia antes de agregarlos a genes.
+
+```{r tximport-oscc4}
+archivo_quant <- file.path(
+  proyecto, "results", "completos", "OSCC_4-P",
+  "salmon", "OSCC_4-P", "quant.sf"
+)
+
+stopifnot(file.exists(archivo_quant))
+
+quant <- read.delim(
+  archivo_quant,
+  check.names = FALSE,
+  stringsAsFactors = FALSE
+)
+
+stopifnot(
+  all(c("Name", "Length", "EffectiveLength", "TPM", "NumReads") %in%
+        names(quant)),
+  nrow(quant) > 0,
+  !anyDuplicated(quant$Name),
+  all(is.finite(quant$NumReads)),
+  all(quant$NumReads >= 0)
+)
+
+sin_correspondencia <- setdiff(
+  quant$Name,
+  tx2gene$transcript_id
+)
+
+if (length(sin_correspondencia)) {
+  stop(
+    "Hay transcritos sin correspondencia: ",
+    paste(head(sin_correspondencia, 5), collapse = ", ")
+  )
+}
+
+archivos <- c("OSCC_4-P" = archivo_quant)
+
+txi_oscc4 <- tximport(
+  archivos,
+  type = "salmon",
+  tx2gene = tx2gene,
+  countsFromAbundance = "no",
+  ignoreTxVersion = FALSE,
+  ignoreAfterBar = FALSE,
+  importer = function(x) {
+    read.delim(x, check.names = FALSE)
+  }
+)
+
+# La agregación debe conservar la suma de las estimaciones.
+total_transcritos <- sum(quant$NumReads)
+total_genes <- sum(txi_oscc4$counts)
+
+stopifnot(
+  identical(colnames(txi_oscc4$counts), "OSCC_4-P"),
+  all(is.finite(txi_oscc4$counts)),
+  all(txi_oscc4$counts >= 0),
+  isTRUE(all.equal(
+    total_transcritos,
+    total_genes,
+    tolerance = 1e-8
+  ))
+)
+
+resumen_tximport <- data.frame(
+  muestra = "OSCC_4-P",
+  transcritos_importados = nrow(quant),
+  transcritos_sin_correspondencia = length(sin_correspondencia),
+  genes_obtenidos = nrow(txi_oscc4$counts),
+  genes_con_conteo_positivo = sum(txi_oscc4$counts[, 1] > 0),
+  suma_estimaciones_transcritos = total_transcritos,
+  suma_estimaciones_genes = total_genes
+)
+
+knitr::kable(
+  resumen_tximport,
+  digits = 3,
+  caption = "Comprobaciones de la agregación de transcritos a genes."
+)
+```
+
+## Conservación de los objetos de análisis
+
+El objeto completo conserva conteos estimados, abundancias y longitudes
+efectivas por gen. Se utilizará la misma estrategia de importación
+conjunta cuando estén disponibles las ocho muestras.
+
+```{r guardar-tximport}
+salida_txi <- file.path(
+  proyecto, "results", "analisis_salmon", "prueba_OSCC_4-P"
+)
+dir.create(salida_txi, recursive = TRUE, showWarnings = FALSE)
+
+saveRDS(
+  txi_oscc4,
+  file.path(salida_txi, "tximport_OSCC_4-P.rds")
+)
+
+write.csv(
+  resumen_tximport,
+  file.path(salida_txi, "resumen_importacion.csv"),
+  row.names = FALSE
+)
+
+procedencia <- list(
+  referencia = fasta,
+  correspondencia = ruta_tx2gene,
+  cuantificacion = archivo_quant,
+  md5 = tools::md5sum(c(fasta, ruta_tx2gene, archivo_quant)),
+  countsFromAbundance = "no",
+  sesion = sessionInfo()
+)
+
+saveRDS(
+  procedencia,
+  file.path(salida_txi, "procedencia_importacion.rds")
+)
+```
+
+# Análisis complementarios
+
+## Conteos publicados de GSE184616
+
+Se revisará la matriz de conteos sin normalizar de los autores.
+
+Se compararán resultados obtenidos para los mismos pacientes y contraste.
+Las diferencias pueden deberse al trimming, cuantificación y anotación;
+no se atribuirán exclusivamente a Salmon frente a STAR.
+
+Ambas matrices representan los mismos pacientes y no se tratarán
+como réplicas biológicas adicionales.
+
+## Cohorte externa TCGA
+
+La incorporación de TCGA-HNSC dependerá de la disponibilidad de
+tumores primarios de cavidad oral con HPV negativo documentado
+y antecedentes de tabaquismo conocidos.
+
+La cohorte se analizará por separado y se compararán resultados
+a nivel de genes y vías. No se concatenarán automáticamente sus
+conteos con los de GEO.
+
+# Análisis de los conteos publicados
+
+Esta sección utiliza los conteos sin normalizar publicados por los
+autores de GSE184616. Constituye un análisis separado del reprocesamiento
+con Salmon y conserva las mismas ocho muestras y el mismo contraste.
+
+## Importación y selección de muestras
+
+```{r conteos-autores}
+library(DESeq2)
+
+archivo_conteos <- file.path(
+  proyecto, "data", "processed", "geo_autores",
+  "GSE184616_unnormalisedGeneCounts.txt.gz"
+)
+
+if (!file.exists(archivo_conteos)) {
+  stop("Falta descargar la matriz de conteos de los autores.")
+}
+
+conteos_autores <- read.delim(
+  archivo_conteos,
+  row.names = 1,
+  check.names = FALSE
+)
+
+faltan <- setdiff(metadata$sample, colnames(conteos_autores))
+
+if (length(faltan)) {
+  stop(
+    "Hay que revisar la correspondencia de nombres.\n",
+    "Muestras que no coinciden: ", paste(faltan, collapse = ", "),
+    "\nColumnas disponibles: ",
+    paste(colnames(conteos_autores), collapse = ", ")
+  )
+}
+
+# Seleccionar y ordenar por identidad, no por posición original.
+cts <- as.matrix(conteos_autores[, metadata$sample, drop = FALSE])
+
+stopifnot(
+  is.numeric(cts),
+  all(is.finite(cts)),
+  all(cts >= 0),
+  all(cts == round(cts)),
+  !anyDuplicated(rownames(cts)),
+  all(colSums(cts) > 0)
+)
+
+coldata <- as.data.frame(metadata)
+rownames(coldata) <- coldata$sample
+coldata$group <- factor(
+  coldata$group,
+  levels = c("never_smoker", "ever_smoker")
+)
+
+stopifnot(identical(colnames(cts), rownames(coldata)))
+
+knitr::kable(
+  data.frame(
+    muestra = colnames(cts),
+    grupo = coldata$group,
+    suma_conteos = colSums(cts)
+  ),
+  caption = "Suma de conteos por muestra en la matriz de los autores."
+)
+```
+
+## Filtrado y expresión diferencial
+
+Se conservan genes con al menos 10 conteos en un mínimo de cuatro
+muestras. El modelo principal es `~ group`, sin ajuste por covariables.
+Por tanto, las asociaciones pueden estar afectadas por confusión clínica.
+
+```{r deseq-autores}
+dds_autores <- DESeqDataSetFromMatrix(
+  countData = cts,
+  colData = coldata,
+  design = ~ group
+)
+
+conservar <- rowSums(counts(dds_autores) >= 10) >= 4
+
+knitr::kable(
+  data.frame(
+    genes_entrada = nrow(dds_autores),
+    genes_conservados = sum(conservar)
+  )
+)
+
+if (sum(conservar) < 2) {
+  stop("Muy pocos genes tras el filtrado: revisar la entrada.")
+}
+
+dds_autores <- dds_autores[conservar, ]
+dds_autores <- DESeq(dds_autores, parallel = FALSE)
+
+res_autores <- results(
+  dds_autores,
+  contrast = c("group", "ever_smoker", "never_smoker"),
+  alpha = 0.05
+)
+
+summary(res_autores)
+```
+
+## Exploración mediante PCA
+
+El PCA utiliza expresión transformada mediante VST y los 500 genes
+de mayor varianza, o todos los disponibles si son menos.
+Las etiquetas de tabaquismo se superponen después de calcular los ejes.
+
+```{r pca-autores, fig.cap="PCA de las ocho muestras a partir de los conteos publicados."}
+vsd_autores <- varianceStabilizingTransformation(
+  dds_autores,
+  blind = TRUE
+)
+
+pca_autores <- plotPCA(
+  vsd_autores,
+  intgroup = "group",
+  ntop = min(500, nrow(vsd_autores)),
+  returnData = TRUE
+)
+
+varianza <- 100 * attr(pca_autores, "percentVar")
+
+ggplot(pca_autores, aes(PC1, PC2, colour = group)) +
+  geom_point(size = 3) +
+  geom_text(aes(label = name), vjust = -0.7, size = 3) +
+  scale_colour_manual(values = paleta) +
+  labs(
+    x = sprintf("PC1: %.1f %%", varianza[1]),
+    y = sprintf("PC2: %.1f %%", varianza[2]),
+    colour = "Grupo"
+  )
+```
+
+## Resultados y exportación
+
+Un log2 fold change positivo indica mayor expresión en ever_smoker.
+La significancia se define como FDR < 0,05. Los valores ajustados
+ausentes no se clasifican como significativos.
+
+```{r resultados-autores}
+tabla_autores <- as.data.frame(res_autores)
+tabla_autores$gene_id <- rownames(tabla_autores)
+
+tabla_autores <- tabla_autores[
+  order(tabla_autores$padj, na.last = TRUE),
+  ,
+  drop = FALSE
+]
+
+tabla_mostrar <- head(tabla_autores, 15)
+
+tabla_mostrar <- tabla_mostrar[, c(
+  "gene_id", "baseMean", "log2FoldChange",
+  "lfcSE", "stat", "pvalue", "padj"
+)]
+
+tabla_mostrar$pvalue <- formatC(
+  tabla_mostrar$pvalue, format = "e", digits = 2
+)
+tabla_mostrar$padj <- formatC(
+  tabla_mostrar$padj, format = "e", digits = 2
+)
+
+knitr::kable(
+  tabla_mostrar,
+  row.names = FALSE,
+  digits = 3,
+  caption = "Primeros 15 genes ordenados por FDR: ever_smoker frente a never_smoker."
+)
+
+salida_autores <- file.path(proyecto, "results", "analisis_geo_autores")
+dir.create(salida_autores, recursive = TRUE, showWarnings = FALSE)
+
+write.csv(
+  tabla_autores,
+  file.path(salida_autores, "deseq2_ever_vs_never.csv"),
+  row.names = FALSE
+)
+
+saveRDS(
+  list(
+    dds = dds_autores,
+    vst = vsd_autores,
+    resultados = res_autores,
+    metadata = coldata,
+    archivo_entrada = archivo_conteos,
+    md5_entrada = tools::md5sum(archivo_conteos),
+    sesion = sessionInfo()
+  ),
+  file.path(salida_autores, "analisis_autores.rds")
+)
+```
+
+# Limitaciones
+
+El análisis es exploratorio por el reducido tamaño muestral.
+
+Las diferencias clínicas entre grupos, la calidad de los metadatos
+y las decisiones de procesamiento pueden afectar las asociaciones
+observadas. No se interpretarán como efectos causales del tabaquismo.
+
+# Procedencia y reproducibilidad
+
+```{r procedencia}
+cat("Proyecto:", proyecto, "\n")
+cat("Lote consultado:", resultados, "\n")
+cat("Fecha de generación:", format(Sys.time(), tz = "America/Santiago"), "\n")
+
+entradas <- c(
+  file.path(proyecto, "metadata", "sample_metadata.csv"),
+  file.path(proyecto, "metadata", "samplesheet.csv"),
+  if (nrow(qc)) qc$archivo else character()
+)
+
+huellas <- tools::md5sum(entradas)
+knitr::kable(
+  data.frame(archivo = names(huellas), md5 = unname(huellas)),
+  caption = "Archivos leídos para generar esta versión del informe."
+)
+```
+
+```{r resumen-diferenciales-autores}
+significativos <- !is.na(res_autores$padj) & res_autores$padj < 0.05
+
+knitr::kable(data.frame(
+  categoria = c(
+    "Mayor expresión en ever_smoker",
+    "Mayor expresión en never_smoker"
+  ),
+  genes = c(
+    sum(significativos & res_autores$log2FoldChange > 0, na.rm = TRUE),
+    sum(significativos & res_autores$log2FoldChange < 0, na.rm = TRUE)
+  )
+))
+```
+
+```{r candidatos-autores, fig.cap="Conteos normalizados por paciente, en escala logarítmica. Genes seleccionados entre los resultados del mismo análisis; estos gráficos son descriptivos."}
+for (gen in c("COBL", "PPARGC1A", "CNGB1")) {
+  plotCounts(
+    dds_autores,
+    gene = gen,
+    intgroup = "group",
+    main = gen
+  )
+}
+```
+
+```{r sesion}
+sessionInfo()
+```
